@@ -1,0 +1,73 @@
+@use 'GlobalVariables';
+@use 'Authentication';
+
+*{
+    margin: 0;
+    padding: 0px;
+    font-family: 'Gluten', cursive;
+    font-weight: 400; //300, 400, 700
+    color: GlobalVariables.$text-color;
+}
+
+//---------------------------------------------------
+
+button{
+    border: 1px solid GlobalVariables.$primary-color;
+    border-radius: 1rem;
+
+    width:75%;
+
+    padding: 8px;
+
+    background-color: GlobalVariables.$bg-color;
+}
+
+button:hover{
+    background-color: GlobalVariables.$primary-color;
+    color: GlobalVariables.$bg-color;
+}
+
+//---------------------------------------------------
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input{
+    border: 1px solid GlobalVariables.$text-color;
+    border-radius: 4px;
+
+    height: 1.5rem;
+
+    padding: 0 4px;
+
+    font-family: 'Jaldi', sans-serif;
+}
+
+input:focus{
+    outline: none;
+    border: 1px solid GlobalVariables.$primary-color;
+}
+//---------------------------------------------------
+
+a{
+    margin: 16px;
+}
+
+//---------------------------------------------------
+
+.App{
+    display: flex;
+    justify-content: center;
+}
+
+//---------------------------------------------------
+
+@media only screen and (min-width: 600px) {
+    input{
+        width: 200px;
+        height: 2rem;
+    }
+}

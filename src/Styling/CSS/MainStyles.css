@@ -1,0 +1,75 @@
+.auth-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.auth-component > h1 {
+  margin: 16px;
+}
+
+@media only screen and (min-width: 600px) {
+  .auth-component > h1 {
+    font-size: 4rem;
+    margin: 32px;
+  }
+}
+* {
+  margin: 0;
+  padding: 0px;
+  font-family: "Gluten", cursive;
+  font-weight: 400;
+  color: #9E9E9E;
+}
+
+button {
+  border: 1px solid #C24BD6;
+  border-radius: 1rem;
+  width: 75%;
+  padding: 8px;
+  background-color: #FFFFFF;
+}
+
+button:hover {
+  background-color: #C24BD6;
+  color: #FFFFFF;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  border: 1px solid #9E9E9E;
+  border-radius: 4px;
+  height: 1.5rem;
+  padding: 0 4px;
+  font-family: "Jaldi", sans-serif;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #C24BD6;
+}
+
+a {
+  margin: 16px;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 600px) {
+  input {
+    width: 200px;
+    height: 2rem;
+  }
+}
+
+/*# sourceMappingURL=MainStyles.css.map */
