@@ -21,16 +21,16 @@ export default function Signin() {
     }, [userValue, passValue]);
 
     return (
-    <div className='auth-component'>
-        <h1>Sign In</h1>
-        <form onSubmit={submitCredentials} >
-            <input type='text' name='username' placeholder='Username' value={userValue} onChange={event => setUserValue(event.target.value)} /><br/>
+        <div className='auth-component'>
+            <h1>Sign In</h1>
+            <form onSubmit={submitCredentials} >
+                <input type='text' name='username' placeholder='Username' value={userValue} onChange={event => setUserValue(event.target.value)} /><br/>
 
-            <input type='text' name='password' placeholder='Password' value={passValue} onChange={event => setPassValue(event.target.value)} /><br/>
+                <input type='text' name='password' placeholder='Password' value={passValue} onChange={event => setPassValue(event.target.value)} /><br/>
 
-            <button type="submit">Sign In</button>
-        </form>
-        <Link to='/Signup' >Need an account?</Link>
-    </div>
+                <button type="submit">Sign In</button>
+            </form>
+            <Link to='/Signup' >Need an account?</Link>
+        </div>
     )
 }
