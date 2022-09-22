@@ -1,22 +1,20 @@
 import React from 'react'
-import TestingImage from '../Images/TestingImage.png'
 import GoldStar from '../Images/GoldStar.svg'
+import RoundButton from './RoundButton'
 
 export default function Post(props) {
   return (
     <div className='post'>
-        <img src={TestingImage} alt='post image' />
+        <img className='post-content' src={props.content} alt='post image' />
         <div className='post-info' >
             <div className='author-info'>
-                <button className='round-button' >
-                    <img className='profile-pic' src='https://i1.sndcdn.com/avatars-P9AimttHN0dhFha9-R0gNbA-t500x500.jpg' alt='img'/>
-                </button>
-                <h1>Ryth Biss<br/>Prompt</h1>
+                <RoundButton img='https://i.kym-cdn.com/photos/images/facebook/001/896/232/2a0.jpg' />
+                <h1>{props.author}<br/>{props.prompt}</h1>
             </div>
             <div className='stars'>
                 <img className='star-part' src={GoldStar} alt='star image'/>
                 <div className='star-part'>
-                    <h1>7</h1>
+                    <h1>{props.stars}</h1>
                 </div>
             </div>
         </div>

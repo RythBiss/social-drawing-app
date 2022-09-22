@@ -1,11 +1,12 @@
 import React from 'react'
+import RoundButton from './RoundButton'
 
 export default function Header() {
   return (
     <header className='page-cap' >
-      <button className='round-button' ></button>
+      <RoundButton />
       <h1>Pen Post</h1>
-      <button className='round-button' ></button>
+      <RoundButton />
     </header>
   )
 }
