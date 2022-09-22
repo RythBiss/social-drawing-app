@@ -19,10 +19,10 @@ function App() {
         {authorized ? <Header /> : <></>}
         <div className='page'>
           <Routes>
-            <Route path='/' element={<Landing />} />
-            <Route path='/Signin' element={<Signin />} />
-            <Route path='/Signup' element={<Signup />} />
-            <Route path='/Home' element={<Home />} />
+            <Route path='/' element={<Landing renderHeaders={setAuthorized} />} />
+            <Route path='/Signin' element={<Signin renderHeaders={setAuthorized} />} />
+            <Route path='/Signup' element={<Signup renderHeaders={setAuthorized} />} />
+            <Route path='/Home' element={<Home renderHeaders={setAuthorized} />} />
           </Routes>
         </div>
         {authorized ? <Footer /> : <></>}

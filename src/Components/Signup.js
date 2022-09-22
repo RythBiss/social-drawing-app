@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authorizeUser } from '../Functions/API';
 
-export default function Signup() {
+export default function Signup(props) {
 
     //these will not be stored in plain text, develop a more secure solution when backend is up.
     //firebase handles encryption. Just make the API call with the data and don't save it anywhere.
@@ -33,6 +33,8 @@ export default function Signup() {
     useEffect(() => {
         console.log(`${userValue} / ${passValue} / ${confirmValue}`);
     }, [userValue, passValue, confirmValue]);
+
+    props.renderHeaders(false);
 
     return (
         <div className='auth-component'>

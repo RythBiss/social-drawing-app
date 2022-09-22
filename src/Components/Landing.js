@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Home() {
+export default function Home(props) {
 
     const nav = useNavigate();
 
@@ -12,6 +12,8 @@ export default function Home() {
     const toSignin = () => {
         nav('/Signin');
     }
+
+    props.renderHeaders(false);
 
   return (
     <div className='home-container'>
