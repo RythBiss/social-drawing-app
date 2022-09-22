@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { authorizeUser } from '../Functions/API';
 
 export default function Signup() {
 
@@ -10,12 +11,23 @@ export default function Signup() {
     const [passValue, setPassValue] =useState('');
     const [confirmValue, setConfirmValue] =useState('');
 
+    const nav = useNavigate();
+
+    const toHome = () => {
+        nav('/Home');
+    }
+
     const submitCredentials = (event) => {
         event.preventDefault();
 
         setUserValue('');
         setPassValue('');
-        setConfirmValue('');
+
+        console.log('Submited');
+
+        if(authorizeUser() === true){
+            toHome();
+        }
     }
 
     useEffect(() => {

@@ -2,6 +2,7 @@
 @use 'Authentication';
 @use 'pageCaps';
 @use 'Home';
+@use 'Post';
 
 *{
     margin: 0;
@@ -22,6 +23,18 @@ button{
     padding: 8px;
 
     background-color: GlobalVariables.$bg-color;
+}
+
+.round-button{
+    $size: 48px;
+
+    width: $size;
+    height: $size;
+    border-radius: calc($size/2);
+
+    overflow: hidden;
+
+    margin: 8px;
 }
 
 button:hover{
@@ -68,9 +81,18 @@ a{
 .App{
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
 
     height: 100vh;
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+
+    height: 100%;
+
+    overflow-y: scroll;
 }
 
 //---------------------------------------------------

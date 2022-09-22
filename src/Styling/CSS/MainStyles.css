@@ -1,3 +1,7 @@
+.post, .page-cap {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
+
 .auth-component {
   display: flex;
   flex-direction: column;
@@ -23,11 +27,10 @@
 }
 .page-cap {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 56px;
   padding: 4px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
 .home-container {
@@ -35,16 +38,69 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: clamp(175px, 50%, 300px);
 }
 
 .home-buttons-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 25%;
+  width: 100%;
 }
 .home-buttons-container > button {
   margin: 8px;
+}
+
+.post {
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 64px 0;
+}
+
+.post-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #C24BD6;
+}
+.post-info h1 {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  text-align: left;
+}
+.post-info > .author-info {
+  display: flex;
+  align-items: center;
+}
+.post-info > .author-info > .round-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+}
+
+.profile-pic {
+  width: 200%;
+}
+
+.stars {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  margin: 8px;
+}
+.stars > .star-part {
+  grid-column: 1;
+  grid-row: 1;
+  margin: auto;
+  width: 100%;
+}
+.stars > div {
+  height: 12px;
+}
+.stars > div > h1 {
+  font-size: 1.4rem;
+  text-align: center;
 }
 
 * {
@@ -61,6 +117,14 @@ button {
   width: 75%;
   padding: 8px;
   background-color: #FFFFFF;
+}
+
+.round-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 8px;
 }
 
 button:hover {
@@ -101,6 +165,13 @@ a {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 @media only screen and (min-width: 600px) {

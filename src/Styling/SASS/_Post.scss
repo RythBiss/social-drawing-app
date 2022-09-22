@@ -1,0 +1,73 @@
+@use 'GlobalVariables';
+
+.post{
+    border-radius: 4px;
+
+    @extend %shadow;
+
+    overflow: hidden;
+
+    margin: 64px 0;
+}
+
+.post-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: GlobalVariables.$primary-color;
+
+    h1{
+        color: GlobalVariables.$bg-color;
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    > .author-info{
+        display: flex;
+        align-items: center;
+
+        > .round-button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 1px solid white;
+        }
+    }
+}
+
+.profile-pic{
+    width: 200%;
+}
+
+.stars{
+    $size: 50px;
+
+    display: grid;
+
+    width: $size;
+    height: $size;
+
+    margin: 8px;
+
+    > .star-part{
+        grid-column: 1;
+        grid-row: 1;
+    
+        margin: auto;
+
+        width: 100%;
+    }
+
+    > div{
+        height: 12px;
+
+        > h1{
+            font-size: 1.4rem;
+            
+            text-align: center;
+        }
+    }
+}
+

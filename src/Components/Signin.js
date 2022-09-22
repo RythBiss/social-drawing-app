@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { authorizeUser } from '../Functions/API';
 
 export default function Signin() {
 
@@ -9,11 +10,23 @@ export default function Signin() {
     const [userValue, setUserValue] = useState('');
     const [passValue, setPassValue] =useState('');
 
+    const nav = useNavigate();
+
+    const toHome = () => {
+        nav('/Home');
+    }
+
     const submitCredentials = (event) => {
         event.preventDefault();
 
         setUserValue('');
         setPassValue('');
+
+        console.log('Submited');
+
+        if(authorizeUser() === true){
+            toHome();
+        }
     }
 
     useEffect(() => {
@@ -28,7 +41,7 @@ export default function Signin() {
 
                 <input type='text' name='password' placeholder='Password' value={passValue} onChange={event => setPassValue(event.target.value)} /><br/>
 
-                <button type="submit">Sign In</button>
+                <button type="submit" onClick={submitCredentials}>Sign In</button>
             </form>
             <Link to='/Signup' >Need an account?</Link>
         </div>

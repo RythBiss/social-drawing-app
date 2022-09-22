@@ -3,6 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    width: clamp(175px, 50%, 300px);
 }
 
 .home-buttons-container{
@@ -10,7 +12,7 @@
     flex-direction: row;
     justify-content: center;
 
-    width: 25%;
+    width: 100%;
 
     > button{
         margin: 8px;
