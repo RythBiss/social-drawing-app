@@ -13,10 +13,12 @@ function App() {
   //hides or shows header and footer
   const  [authorized, setAuthorized] = useState(true);
 
+  const [profilePic, setProfilePic] = useState('https://i.kym-cdn.com/photos/images/facebook/001/896/232/2a0.jpg');
+
   return (
     <Router>
       <div className="App">
-        {authorized ? <Header /> : <></>}
+        {authorized ? <Header profilePic={profilePic} /> : <></>}
         <div className='page'>
           <Routes>
             <Route path='/' element={<Landing renderHeaders={setAuthorized} />} />

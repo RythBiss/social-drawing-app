@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Home(props) {
@@ -13,7 +13,10 @@ export default function Home(props) {
         nav('/Signin');
     }
 
-    props.renderHeaders(false);
+    useEffect(() => {
+        props.renderHeaders(false);
+    }, [])
+    
 
   return (
     <div className='home-container'>

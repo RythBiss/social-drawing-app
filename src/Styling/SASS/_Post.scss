@@ -3,7 +3,7 @@
 .post{
     border-radius: 4px;
 
-    @extend %shadow;
+    @extend %even-shadow;
 
     overflow: hidden;
 
@@ -32,10 +32,6 @@
         align-items: center;
 
         > .round-button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
             border: 1px solid white;
         }
     }
@@ -71,6 +67,9 @@
             font-size: 1.4rem;
             
             text-align: center;
+
+            text-shadow: 1px 1px rgba(0, 0, 0, 0.25
+            );
         }
     }
 }

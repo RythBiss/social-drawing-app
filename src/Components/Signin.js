@@ -33,7 +33,9 @@ export default function Signin(props) {
         console.log(`${userValue} / ${passValue}`);
     }, [userValue, passValue]);
 
-    props.renderHeaders(false);
+    useEffect(() => {
+        props.renderHeaders(false);
+    }, [])
 
     return (
         <div className='auth-component'>

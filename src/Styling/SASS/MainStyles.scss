@@ -25,6 +25,17 @@ button{
     background-color: GlobalVariables.$bg-color;
 }
 
+button:hover{
+    background-color: GlobalVariables.$primary-color;
+    color: GlobalVariables.$bg-color;
+}
+
+button:active{
+    background-color: GlobalVariables.$primary-color-light;
+    border: 1px solid GlobalVariables.$primary-color-light;
+    scale: 0.95;
+}
+
 .round-button{
     $size: 48px;
 
@@ -35,16 +46,12 @@ button{
     overflow: hidden;
 
     margin: 8px;
-}
 
-button:hover{
-    background-color: GlobalVariables.$primary-color;
-    color: GlobalVariables.$bg-color;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-button:active{
-    background-color: GlobalVariables.$primary-color-light;
-    border: 1px solid GlobalVariables.$primary-color-light;
+    @extend %shadow;
 }
 
 //---------------------------------------------------
@@ -72,6 +79,7 @@ input:focus{
 }
 //---------------------------------------------------
 
+// react-router's <Link> counts as an <a>
 a{
     margin: 16px;
 }

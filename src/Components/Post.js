@@ -8,7 +8,7 @@ export default function Post(props) {
         <img className='post-content' src={props.content} alt='post image' />
         <div className='post-info' >
             <div className='author-info'>
-                <RoundButton img='https://i.kym-cdn.com/photos/images/facebook/001/896/232/2a0.jpg' />
+                <RoundButton img='https://preview.redd.it/pcmfkxdynoj41.jpg?width=640&crop=smart&auto=webp&s=11a2d69c2c187c961c9743360c35073c26e926c3' />
                 <h1>{props.author}<br/>{props.prompt}</h1>
             </div>
             <div className='stars'>

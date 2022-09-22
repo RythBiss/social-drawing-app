@@ -1,3 +1,7 @@
+.round-button {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
 .post, .page-cap {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
@@ -77,9 +81,6 @@
   align-items: center;
 }
 .post-info > .author-info > .round-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 1px solid white;
 }
 
@@ -105,6 +106,7 @@
 .stars > div > h1 {
   font-size: 1.4rem;
   text-align: center;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 @media only screen and (min-width: 576px) {
@@ -133,14 +135,6 @@ button {
   background-color: #FFFFFF;
 }
 
-.round-button {
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  overflow: hidden;
-  margin: 8px;
-}
-
 button:hover {
   background-color: #C24BD6;
   color: #FFFFFF;
@@ -149,6 +143,18 @@ button:hover {
 button:active {
   background-color: #ec83ff;
   border: 1px solid #ec83ff;
+  scale: 0.95;
+}
+
+.round-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form {
