@@ -119,6 +119,40 @@
     width: 256px;
   }
 }
+.drawing-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  margin: 64px;
+  border: 2px solid red;
+}
+
+.drawing {
+  min-width: 300px;
+  max-height: 300px;
+  border-radius: 4px;
+}
+
+.drawing-tools {
+  border: 2px solid #9E9E9E;
+  width: 256px;
+  height: 55%;
+}
+
+@media only screen and (min-width: 430px) {
+  .drawing {
+    min-width: 400px;
+    max-height: 400px;
+  }
+}
+@media only screen and (min-width: 630px) {
+  .drawing {
+    min-width: 600px;
+    max-height: 600px;
+  }
+}
 * {
   margin: 0;
   padding: 0px;

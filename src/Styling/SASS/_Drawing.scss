@@ -1,0 +1,50 @@
+@use 'GlobalVariables';
+
+.drawing-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 4px;
+    margin: 64px;
+
+    border: 2px solid red;
+    //ReactSketchCanvas needs to be styled inline for some reason?
+}
+
+.drawing{
+    $size: 300px;
+
+    min-width: $size;
+    max-height: $size;
+
+    border-radius: 4px;
+}
+
+.drawing-tools{
+    border: 2px solid GlobalVariables.$text-color;
+
+    width: 256px;
+    height: 55%;
+}
+
+@media only screen and (min-width: 430px) {
+    .drawing{
+        $size: 400px;
+
+        min-width: $size;
+        max-height: $size;
+    }
+}
+
+@media only screen and (min-width: 630px) {
+    .drawing{
+        $size: 600px;
+
+        min-width: $size;
+        max-height: $size;
+
+    }
+}
+
