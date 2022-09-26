@@ -1,0 +1,30 @@
+@use 'GlobalVariables';
+
+$size: 300px;
+
+.drawing-container{
+    display: flex;
+    flex-direction: row;
+
+    padding: 4px;
+    margin: 64px;
+
+    width: $size;
+    height: $size;
+
+    border: 2px solid red;
+    //ReactSketchCanvas needs to be styled inline for some reason?
+}
+
+.drawing{
+    border-radius: 4px;
+    background-color: pink;
+}
+
+// .drawing-tools{
+//     border: 2px solid GlobalVariables.$text-color;
+
+//     width: 256px;
+//     height: 55%;
+// }
+

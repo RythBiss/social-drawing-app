@@ -1,12 +1,15 @@
 import './Styling/CSS/MainStyles.css';
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signin from './Components/Signin';
 import Signup from './Components/Signup';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Landing from './Components/Landing';
 import Home from './Components/Home';
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Drawing from './Components/Drawing';
+import Following from './Components/Following';
+import History from './Components/History';
 
 function App() {
 
@@ -25,6 +28,9 @@ function App() {
             <Route path='/Signin' element={<Signin renderHeaders={setAuthorized} />} />
             <Route path='/Signup' element={<Signup renderHeaders={setAuthorized} />} />
             <Route path='/Home' element={<Home renderHeaders={setAuthorized} />} />
+            <Route path='/Draw' element={<Drawing renderHeaders={setAuthorized} />} />
+            <Route path='/Following' element={<Following renderHeaders={setAuthorized} />} />
+            <Route path='/History' element={<History renderHeaders={setAuthorized} />} />
           </Routes>
         </div>
         {authorized ? <Footer /> : <></>}
