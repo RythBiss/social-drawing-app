@@ -17,7 +17,7 @@ export default function Drawing(props) {
     <div className='drawing-container'>
         {/* https://www.npmjs.com/package/react-sketch-canvas */}
         <ReactSketchCanvas ref={drawing} className='drawing' style={styles} strokeWidth={4} strokeColor="red" />
-        <div className='drawing-tools' ></div>
+        {/* <div className='drawing-tools' ></div> */}
     </div>
   )
 }
