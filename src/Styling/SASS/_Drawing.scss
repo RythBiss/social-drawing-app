@@ -21,6 +21,7 @@
 }
 
 .button-row{
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -36,6 +37,18 @@ button{
     align-items: center;
 
     width: 100%;
+}
+
+.pen-selector{
+    position: absolute;
+    top: -115%;
+
+    display: flex;
+
+    border: 2px solid GlobalVariables.$text-color;
+    border-radius: 24px;
+    
+    background-color: GlobalVariables.$bg-color;
 }
 
 

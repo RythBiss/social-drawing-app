@@ -15,6 +15,8 @@ export default function DrawingCanvas() {
     const [tempPath, setTempPath] = useState([]);
     const [history, setHistory] = useState([]);
     const [forward, setForward] = useState([]);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuType, setMenuType] = useState('');
 
     const startDrawing = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent;
@@ -85,11 +87,21 @@ export default function DrawingCanvas() {
     }
 
     const penSize = () => {
-        console.log('open pen size tray...')
+        if(menuOpen && menuType === 'Pen'){
+            setMenuOpen(false);
+        }else{
+            setMenuOpen(true);
+            setMenuType('Pen');
+        }
     }
 
     const pickColor = () => {
-        console.log('open color tray...')
+        if(menuOpen && menuType === 'Color'){
+            setMenuOpen(false);
+        }else{
+            setMenuOpen(true);
+            setMenuType('Color');
+        }
     }
 
     const erase = () => {
@@ -121,8 +133,6 @@ export default function DrawingCanvas() {
     }, []);
 
     useEffect(() => {
-        console.log(`forward: ${forward}`)
-
         history.forEach(path => {
             contextRef.current.beginPath();
             contextRef.current.moveTo(path.tempPath[0].x, path.tempPath[0].y);
@@ -145,12 +155,12 @@ export default function DrawingCanvas() {
         />
         <div className='drawing-tools'>
             <div className='button-row'>
-                <RoundButton img={Undo} selectable={true} onClick={undo} />
-                <RoundButton img={Brush} selectable={true} onClick={penSize} />
-                <RoundButton img={Pallet} selectable={true} onClick={pickColor} />
-                <RoundButton img={Erase} selectable={true} onClick={erase} />
-                <RoundButton img={Redo} selectable={true} onClick={redo} />
-                <RoundButtonPopUp selected={true} />
+                <RoundButtonPopUp open={menuOpen} type={menuType} />
+                <RoundButton img={Undo} onClick={undo} />
+                <RoundButton img={Brush} onClick={penSize} />
+                <RoundButton img={Pallet} onClick={pickColor} />
+                <RoundButton img={Erase} onClick={erase} />
+                <RoundButton img={Redo} onClick={redo} />
             </div>
             <button onClick={submit}>Submit</button>
         </div>

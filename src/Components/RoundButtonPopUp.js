@@ -1,19 +1,37 @@
 import React, { useEffect, useState } from 'react'
+import RoundButton from './RoundButton';
 
 export default function RoundButtonPopUp(props) {
 
-    const [open, toggle] = useState(false);
+  const [menu, setMenu] = useState(<></>);
 
-    useEffect(() => {
-      toggle(props.selected);
-    }, [])
+  useEffect(() => {
+    if(props.type === 'Pen'){
+      setMenu(<>
+        <RoundButton />
+        <RoundButton />
+        <RoundButton />
+      </>)
+    }else{
+      setMenu(<>
+        <RoundButton />
+        <RoundButton />
+        <RoundButton />
+        <RoundButton />
+        <RoundButton />
+      </>)
+    }
+  }, [props.type])
 
   return (
-    <select className='list-select'>
-        <option value="black">black</option>
-        <option value="red">red</option>
-        <option value="blue">blue</option>
-        <option value="yellow">yellow</option>
-    </select>
+    <>
+      { props.open &&
+        <>
+          <div className='pen-selector' >
+            {menu}
+          </div>
+        </>
+      }
+    </>
   )
 }
