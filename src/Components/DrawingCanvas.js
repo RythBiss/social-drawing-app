@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import RoundButton from '../Components/RoundButton'
-import Undo from '../Images/Drawing Buttons/Undo.svg'
-import Brush from '../Images/Drawing Buttons/Brush.svg'
-import Pallet from '../Images/Drawing Buttons/Pallet.svg'
-import Erase from '../Images/Drawing Buttons/Erase.svg'
+import RoundButton from '../Components/RoundButton';
+import Undo from '../Images/Drawing Buttons/Undo.svg';
+import Redo from '../Images/Drawing Buttons/Redo.svg';
+import Brush from '../Images/Drawing Buttons/Brush.svg';
+import Pallet from '../Images/Drawing Buttons/Pallet.svg';
+import Erase from '../Images/Drawing Buttons/Erase.svg';
+import RoundButtonPopUp from './RoundButtonPopUp';
 
 export default function DrawingCanvas() {
 
@@ -12,6 +14,7 @@ export default function DrawingCanvas() {
     const [isDrawing, setIsDrawing] = useState(false);
     const [tempPath, setTempPath] = useState([]);
     const [history, setHistory] = useState([]);
+    const [forward, setForward] = useState([]);
 
     const startDrawing = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent;
@@ -20,6 +23,7 @@ export default function DrawingCanvas() {
 
         contextRef.current.beginPath();
         contextRef.current.moveTo(offsetX, offsetY);
+        setForward([]);
         setIsDrawing(true);
     };
 
@@ -55,38 +59,57 @@ export default function DrawingCanvas() {
     //-------------------------------------------------------
 
     const undo = () => {
-        console.log('undo...');
+        {/*https://stackoverflow.com/questions/53960651/how-to-make-an-undo-function-in-canvas*/}
 
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
+        if(history.length > 0){
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
 
-        context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+            context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-        const tempArr = [...history];
-        tempArr.pop();
-        setHistory(tempArr);
+            //creates temporary array, pops it, then sets 'History' to the popped array.
+            //redrawing happens in useEffect.
+            const tempArr = [...history];
+            setForward(forward.concat(tempArr.pop()));
+            setHistory(tempArr);
+        }
     }
   
+    const redo = () => {
+        //pop the newest from 'forward' and concat it to 'history'
+        if(forward.length > 0){
+            const tempArr = [...forward];
+            setHistory(history.concat(tempArr.pop()));
+            setForward(tempArr);
+        }
+    }
+
     const penSize = () => {
-    console.log('open pen size tray...')
+        console.log('open pen size tray...')
     }
 
     const pickColor = () => {
-    console.log('open color tray...')
+        console.log('open color tray...')
     }
 
     const erase = () => {
-    console.log('switching to erase tool...');
+        console.log('switching to erase tool...');
     }
 
     const submit = () => {
-    console.log('Submiting!')
+        console.log('Submiting!')
+
+        const win = window.open();
+        win.document.write(`<h1>Drawing Output</h1>`);
+        win.document.write(`<img src=${canvasRef.current.toDataURL('image/png')} />`);
     }
 
     //-------------------------------------------------------
 
     useEffect(() => {
         const canvas = canvasRef.current;
+
+        //sizes need to match styling.
         canvas.width = 500;
         canvas.height = 500;
 
@@ -98,6 +121,8 @@ export default function DrawingCanvas() {
     }, []);
 
     useEffect(() => {
+        console.log(`forward: ${forward}`)
+
         history.forEach(path => {
             contextRef.current.beginPath();
             contextRef.current.moveTo(path.tempPath[0].x, path.tempPath[0].y);
@@ -107,7 +132,7 @@ export default function DrawingCanvas() {
                 contextRef.current.stroke();
             })
         });
-    }, [history])
+    }, [history]);
 
   return (
     <>
@@ -118,16 +143,17 @@ export default function DrawingCanvas() {
             onMouseMove={draw}
             ref={canvasRef}
         />
-        <div className='button-row'>
-            {/* for undo and redo, you don't save an 'action'. You save the variables for the action (x and y) in an array, then clear the canvas, then use the array to re-draw the canvas. 
-            https://stackoverflow.com/questions/53960651/how-to-make-an-undo-function-in-canvas
-            */}
-            <RoundButton img={Undo} onClick={undo} />
-            <RoundButton img={Brush} onClick={penSize} />
-            <RoundButton img={Pallet} onClick={pickColor} />
-            <RoundButton img={Erase} onClick={erase} />
+        <div className='drawing-tools'>
+            <div className='button-row'>
+                <RoundButton img={Undo} selectable={true} onClick={undo} />
+                <RoundButton img={Brush} selectable={true} onClick={penSize} />
+                <RoundButton img={Pallet} selectable={true} onClick={pickColor} />
+                <RoundButton img={Erase} selectable={true} onClick={erase} />
+                <RoundButton img={Redo} selectable={true} onClick={redo} />
+                <RoundButtonPopUp selected={true} />
+            </div>
+            <button onClick={submit}>Submit</button>
         </div>
-        <button onClick={submit}>Submit</button>
     </>
   )
 }
