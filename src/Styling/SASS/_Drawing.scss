@@ -41,8 +41,7 @@ button{
 
 .pen-color{
     position: absolute;
-    top: -300%;
-    padding: 8px;
+    top: -430%;
 
     display: flex;
     justify-content: center;
@@ -52,6 +51,8 @@ button{
     border-radius: 8px;
     
     background-color: rgb(255, 255, 255, 0.9);
+
+    width: 80%;
 }
 
 .pen-size{

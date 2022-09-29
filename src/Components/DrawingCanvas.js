@@ -23,6 +23,7 @@ export default function DrawingCanvas() {
 
     //event functions
     //-------------------------------------------------------
+    //Touch screen does not work, add events for touch screen
 
     const startDrawing = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent;
@@ -108,9 +109,9 @@ export default function DrawingCanvas() {
     }
 
     const pickColor = (color) => {
-        if(color.hex) setEraserOn(false);
+        if(color) setEraserOn(false);
 
-        setHex(color?.hex);
+        setHex(color);
 
         if(menuOpen && menuType === 'Color'){
             setMenuOpen(false);
