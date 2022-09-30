@@ -31,8 +31,13 @@ export default function DrawingCanvas() {
     }
 
     const startDrawing = ({ nativeEvent }) => {
-        const { offsetX, offsetY } = nativeEvent;
-        const plots = scaleToFrame(offsetX, offsetY);
+
+        const target = nativeEvent.target.getBoundingClientRect();
+        const coords = {
+            offsetX: (nativeEvent.touches) ? nativeEvent.touches[0].pageX - target.left : nativeEvent.offsetX,
+            offsetY: (nativeEvent.touches) ? nativeEvent.touches[0].pageY - target.top : nativeEvent.offsetY
+        }
+        const plots = scaleToFrame(coords.offsetX, coords.offsetY);;
 
         concatPath(plots.x, plots.y);
         contextRef.current.beginPath();
@@ -43,18 +48,22 @@ export default function DrawingCanvas() {
 
     const finishDrawing = () => {
         contextRef.current.closePath();
-        finilizePath();
+        commitPath();
         setIsDrawing(false);
     };
 
     const draw = ({ nativeEvent }) => {
         if (!isDrawing) return;
 
-        const { offsetX, offsetY } = nativeEvent;
-        const plots = scaleToFrame(offsetX, offsetY);
+        // const { offsetX, offsetY } = nativeEvent;
+        const target = nativeEvent.target.getBoundingClientRect();
+        const coords = {
+            offsetX: (nativeEvent.touches) ? nativeEvent.touches[0].pageX - target.left : nativeEvent.offsetX,
+            offsetY: (nativeEvent.touches) ? nativeEvent.touches[0].pageY - target.top : nativeEvent.offsetY
+        }
+        const plots = scaleToFrame(coords.offsetX, coords.offsetY);
 
         concatPath(plots.x, plots.y);
-
         generateStroke(plots.x, plots.y);
     };
 
@@ -65,7 +74,7 @@ export default function DrawingCanvas() {
         setTempPath(tempPath.concat({x: posX, y: posY}));
     }
 
-    const finilizePath = () => {
+    const commitPath = () => {
         setHistory(history.concat({tempPath, penWidth, hex, eraserOn, }));
         setTempPath([]);
     }
@@ -208,8 +217,11 @@ export default function DrawingCanvas() {
         <canvas
             className='drawing-canvas'
             onMouseDown={startDrawing}
+            onTouchStart={startDrawing}
             onMouseUp={finishDrawing}
+            onTouchEnd={finishDrawing}
             onMouseMove={draw}
+            onTouchMove={draw}
             ref={canvasRef}
         />
         <div className='drawing-tools'>
