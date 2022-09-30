@@ -5,7 +5,7 @@ import penMedium from '../Images/Pen Size/PenMed.svg'
 import penLarge from '../Images/Pen Size/PenLarge.svg'
 import ColorPallet from './ColorPallet';
 
-export default function RoundButtonPopUp(props) {
+export default function PenSettings(props) {
 
   const [menu, setMenu] = useState(<></>);
 
@@ -18,7 +18,6 @@ export default function RoundButtonPopUp(props) {
   }
 
   useEffect(() => {
-
     switch(props.type){
       case 'Pen':
         setMenu(

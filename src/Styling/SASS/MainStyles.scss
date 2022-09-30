@@ -31,14 +31,13 @@ button{
 }
 
 button:hover{
-    background-color: GlobalVariables.$primary-color;
+    background-color: GlobalVariables.$hover-color;
     color: GlobalVariables.$bg-color;
 }
 
 button:active{
     background-color: GlobalVariables.$primary-color-light;
-    border: 1px solid GlobalVariables.$primary-color-light;
-    scale: 0.95;
+    scale: 0.9;
 }
 
 .round-button{

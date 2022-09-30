@@ -212,14 +212,13 @@ button {
 }
 
 button:hover {
-  background-color: #C24BD6;
+  background-color: #f8d1ff;
   color: #FFFFFF;
 }
 
 button:active {
   background-color: #ec83ff;
-  border: 1px solid #ec83ff;
-  scale: 0.95;
+  scale: 0.9;
 }
 
 .round-button {

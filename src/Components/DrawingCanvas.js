@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import RoundButton from '../Components/RoundButton';
 import Undo from '../Images/Drawing Buttons/Undo.svg';
 import Redo from '../Images/Drawing Buttons/Redo.svg';
 import Brush from '../Images/Drawing Buttons/Brush.svg';
 import Pallet from '../Images/Drawing Buttons/Pallet.svg';
 import Erase from '../Images/Drawing Buttons/Erase.svg';
-import DynamicPenSettingsMenu from './DynamicPenSettingsMenu';
+import PenSettings from './PenSettings';
 
 export default function DrawingCanvas() {
 
@@ -20,16 +20,23 @@ export default function DrawingCanvas() {
     const [hex, setHex] = useState('#000');
     const [eraserOn, setEraserOn] = useState(false);
     const [penWidth, setPenWidth] = useState(9);
+    const [frameSize, setFrameSize] = useState(0);
 
     //event functions
     //-------------------------------------------------------
     //Touch screen does not work, add events for touch screen
 
+    const scaleToFrame = (_x, _y) => {
+       return { x: (_x / (frameSize / 500)), y: (_y / (frameSize / 500)) }
+    }
+
     const startDrawing = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent;
-        concatPath(offsetX, offsetY);
+        const plots = scaleToFrame(offsetX, offsetY);
+
+        concatPath(plots.x, plots.y);
         contextRef.current.beginPath();
-        contextRef.current.moveTo(offsetX, offsetY);
+        contextRef.current.moveTo(plots.x, plots.y);
         setForward([]);
         setIsDrawing(true);
     };
@@ -44,10 +51,11 @@ export default function DrawingCanvas() {
         if (!isDrawing) return;
 
         const { offsetX, offsetY } = nativeEvent;
+        const plots = scaleToFrame(offsetX, offsetY);
 
-        concatPath(offsetX, offsetY);
+        concatPath(plots.x, plots.y);
 
-        generateStroke(offsetX, offsetY, eraserOn);
+        generateStroke(plots.x, plots.y);
     };
 
     //internal functions
@@ -58,13 +66,11 @@ export default function DrawingCanvas() {
     }
 
     const finilizePath = () => {
-        setHistory(history.concat({tempPath, penWidth, hex, eraserOn}));
+        setHistory(history.concat({tempPath, penWidth, hex, eraserOn, }));
         setTempPath([]);
     }
 
-    const generateStroke = (x, y, erase) => {
-        erase ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
-
+    const generateStroke = (x, y) => {
         contextRef.current.lineTo(x, y);
         contextRef.current.stroke();
     }
@@ -111,6 +117,7 @@ export default function DrawingCanvas() {
     }
 
     const pickColor = (color) => {
+        //turns off eraser if a color is selected.
         if(color) setEraserOn(false);
 
         setHex(color);
@@ -125,14 +132,10 @@ export default function DrawingCanvas() {
     }
 
     const erase = () => {
-        console.log('switching to erase tool...');
-        //create a 'lineTo' function for the eraser so it doesn't skip
         setEraserOn(!eraserOn);
     }
 
     const submit = () => {
-        console.log('Submiting!')
-
         const win = window.open();
         win.document.write(`<h1>Drawing Output</h1>`);
         win.document.write(`<img src=${canvasRef.current.toDataURL('image/png')} />`);
@@ -154,6 +157,8 @@ export default function DrawingCanvas() {
         context.strokeStyle = hex;
         context.lineWidth = penWidth;
         contextRef.current = context;
+
+        setFrameSize(canvasRef.current.offsetWidth);
     }, []);
 
     //redraw when history changes
@@ -163,10 +168,12 @@ export default function DrawingCanvas() {
             contextRef.current.beginPath();
             contextRef.current.strokeStyle = path.hex;
             contextRef.current.lineWidth = path.penWidth;
+            path.eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
+            
             contextRef.current.moveTo(path.tempPath[0].x, path.tempPath[0].y);
 
             path.tempPath.forEach(point => {
-                generateStroke(point.x, point.y, path.eraserOn);
+                generateStroke(point.x, point.y);
             });
         });
 
@@ -183,6 +190,17 @@ export default function DrawingCanvas() {
         contextRef.current.lineWidth = penWidth;
     }, [penWidth]);
 
+    //update erase mode
+    useEffect(() => {
+        eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
+    }, [eraserOn]);
+
+    useLayoutEffect(() => {
+        window.addEventListener('resize', () => {if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth)});
+
+        return () => window.removeEventListener('resize', () => {if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth)});
+    });
+
     //-------------------------------------------------------
 
   return (
@@ -196,7 +214,7 @@ export default function DrawingCanvas() {
         />
         <div className='drawing-tools'>
             <div className='button-row'>
-                <DynamicPenSettingsMenu open={menuOpen} type={menuType} colorResultFunc={pickColor} penWidthFunc={pickWidth} />
+                <PenSettings open={menuOpen} type={menuType} colorResultFunc={pickColor} penWidthFunc={pickWidth} />
                 <RoundButton img={Undo} onClick={undo} />
                 <RoundButton img={Brush} onClick={pickWidth} />
                 <RoundButton img={Pallet} onClick={pickColor} />
