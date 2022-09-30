@@ -19,7 +19,7 @@ export default function DrawingCanvas() {
     const [menuType, setMenuType] = useState('');
     const [hex, setHex] = useState('#000');
     const [eraserOn, setEraserOn] = useState(false);
-    const [penWidth, setPenWidth] = useState(5);
+    const [penWidth, setPenWidth] = useState(9);
 
     //event functions
     //-------------------------------------------------------
@@ -47,12 +47,7 @@ export default function DrawingCanvas() {
 
         concatPath(offsetX, offsetY);
 
-        if(eraserOn){
-            contextRef.current.clearRect(offsetX, offsetY, 16, 16);
-        }else{
-            contextRef.current.lineTo(offsetX, offsetY);
-            contextRef.current.stroke();
-        }
+        generateStroke(offsetX, offsetY, eraserOn);
     };
 
     //internal functions
@@ -65,6 +60,13 @@ export default function DrawingCanvas() {
     const finilizePath = () => {
         setHistory(history.concat({tempPath, penWidth, hex, eraserOn}));
         setTempPath([]);
+    }
+
+    const generateStroke = (x, y, erase) => {
+        erase ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
+
+        contextRef.current.lineTo(x, y);
+        contextRef.current.stroke();
     }
 
     //drawing actions
@@ -164,12 +166,7 @@ export default function DrawingCanvas() {
             contextRef.current.moveTo(path.tempPath[0].x, path.tempPath[0].y);
 
             path.tempPath.forEach(point => {
-                if(path.eraserOn){
-                    contextRef.current.clearRect(point.x, point.y, 16, 16);
-                }else{
-                    contextRef.current.lineTo(point.x, point.y);
-                    contextRef.current.stroke();
-                }
+                generateStroke(point.x, point.y, path.eraserOn);
             });
         });
 

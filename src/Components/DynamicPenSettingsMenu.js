@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import RoundButton from './RoundButton';
-import { CirclePicker } from 'react-color';
 import penSmall from '../Images/Pen Size/PenSmall.svg'
 import penMedium from '../Images/Pen Size/PenMed.svg'
 import penLarge from '../Images/Pen Size/PenLarge.svg'
