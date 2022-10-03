@@ -2,6 +2,7 @@
 
 .page-cap{
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
 
@@ -10,4 +11,34 @@
     padding: 4px;
 
     @extend %even-shadow;
+}
+
+.main-menu{
+    @extend %even-shadow;
+    background-color: GlobalVariables.$bg-color;
+    position: absolute;
+
+    right: 0;
+    top: 0;
+    
+    padding-top: 64px;
+
+    width: 60%;
+    height: 100vh;
+    min-height: calc(48 * 5px);
+
+    > li{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        padding: 16px;
+        font-size: 2rem;
+
+        border-top: 1px solid GlobalVariables.$text-color;
+    }
+
+    .li-last{
+        border-bottom: 1px solid GlobalVariables.$text-color;
+    }
 }

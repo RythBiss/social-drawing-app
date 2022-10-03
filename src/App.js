@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signin from './Components/Signin';
 import Signup from './Components/Signup';
 import Header from './Components/Header';
-import Footer from './Components/Footer';
 import Landing from './Components/Landing';
 import Home from './Components/Home';
 import Drawing from './Components/Drawing';
@@ -21,7 +20,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {authorized ? <Header profilePic={profilePic} /> : <></>}
+        {authorized && <Header profilePic={profilePic} />}
         <div className='page'>
           <Routes>
             <Route path='/' element={<Landing renderHeaders={setAuthorized} />} />
@@ -33,7 +32,6 @@ function App() {
             <Route path='/History' element={<History renderHeaders={setAuthorized} />} />
           </Routes>
         </div>
-        {authorized ? <Footer /> : <></>}
       </div>
     </Router>
   );

@@ -1,13 +1,5 @@
 const baseURL = 'https://jsonplaceholder.typicode.com';
 
-export const authorizeUser = () => {
-    console.log('Authorized!');
-
-    if(true) return true;
-
-    return false;
-}
-
 export const getRecentPosts = async () => {
     let posts = null;
 

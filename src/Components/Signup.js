@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { authorizeUser } from '../Functions/API';
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../firebase-config';
 
 export default function Signup(props) {
 
@@ -14,20 +15,41 @@ export default function Signup(props) {
     const nav = useNavigate();
 
     const toHome = () => {
+        setUserValue('');
+        setPassValue('');
+        setConfirmValue('');
+
         nav('/Home');
     }
 
-    const submitCredentials = (event) => {
-        event.preventDefault();
+    const logout = async() => {
+        try{
+            await signOut(auth);
+        }catch(e){
+            console.log(e.message)
+        }
+    }
 
-        setUserValue('');
-        setPassValue('');
+    const submitCredentials = async(event) => {
+        event.preventDefault();
 
         console.log('Submited');
 
-        if(authorizeUser() === true){
-            toHome();
+        try{
+            if(passValue === confirmValue) {
+                const newUser = await createUserWithEmailAndPassword(auth, userValue, passValue);
+                console.log(newUser);
+                toHome();
+            }else{
+                console.log('Password does not match Confirm Password.');
+            }
+        }catch(e){
+            console.log(e.message);
         }
+
+        setUserValue('');
+        setPassValue('');
+        setConfirmValue('');
     }
 
     useEffect(() => {
@@ -51,6 +73,7 @@ export default function Signup(props) {
                 <button type="submit">Sign In</button>
             </form>
             <Link to='/Signin' >Already have an account?</Link>{/*change to router link*/}
+            <button onClick={logout}>logout</button>
         </div>
     )
 }

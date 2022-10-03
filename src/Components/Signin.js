@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { authorizeUser } from '../Functions/API';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../firebase-config';
 
 export default function Signin(props) {
 
@@ -13,25 +14,39 @@ export default function Signin(props) {
     const nav = useNavigate();
 
     const toHome = () => {
-        nav('/Home');
-    }
-
-    const submitCredentials = (event) => {
-        event.preventDefault();
-
         setUserValue('');
         setPassValue('');
 
-        console.log('Submited');
+        nav('/Home');
+    }
 
-        if(authorizeUser() === true){
-            toHome();
+    const logout = async() => {
+        try{
+            await signOut(auth);
+        }catch(e){
+            console.log(e.message)
         }
     }
 
+    const submitCredentials = async(event) => {
+        event.preventDefault();
+
+        console.log('Submited');
+
+        try{
+            const newUser = await signInWithEmailAndPassword(auth, userValue, passValue);
+            console.log(newUser);
+            toHome();
+        }catch(e){
+            console.log(e.message);
+        }
+
+
+    }
+
     useEffect(() => {
-        console.log(`${userValue} / ${passValue}`);
-    }, [userValue, passValue]);
+        console.log()
+    });
 
     useEffect(() => {
         props.renderHeaders(false);
@@ -48,6 +63,7 @@ export default function Signin(props) {
                 <button type="submit" onClick={submitCredentials}>Sign In</button>
             </form>
             <Link to='/Signup' >Need an account?</Link>
+            <button onClick={logout}>logout</button>
         </div>
     )
 }
