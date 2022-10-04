@@ -1,17 +1,14 @@
-import { auth, storage } from '../firebase-config'
+import { auth, storage, database } from '../firebase-config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { collection, getDocs, addDoc } from 'firebase/firestore';
 
 const baseURL = 'https://jsonplaceholder.typicode.com';
+const postsTableRef = collection(database, 'posts');
 
-export const getRecentPosts = async () => {
-    let posts = null;
-
-    await fetch(`${baseURL}/photos?_page=1`)
-    .then(res => res.json())
-    .then(data => posts = data);
-
-    return posts;
-}
+export const getPosts = async(setPosts) => {
+    const response = await getDocs(postsTableRef);
+    setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
+  }
 
 export const postDrawing = async(canvas) => {
     const drawingRefFB = ref(
@@ -20,9 +17,17 @@ export const postDrawing = async(canvas) => {
     );
 
     canvas.toBlob((blob) => {
+        let author = auth.currentUser.email;
+
         uploadBytes(drawingRefFB, blob).then(() => {
-            getDownloadURL(ref(storage, drawingRefFB._location.path_)).then(r => console.log(r));
-            console.log(auth.currentUser.uid);
+            getDownloadURL(ref(storage, drawingRefFB._location.path_))
+            .then((r) => {
+                createPost(author, r);
+            });
         });
     });
+}
+
+const createPost = async(author, url) => {
+    await addDoc(postsTableRef, { author_id: author, image_url: url, prompt: 'feature is WIP', stars: 0 });
 }

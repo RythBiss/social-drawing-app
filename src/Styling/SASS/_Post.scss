@@ -8,10 +8,13 @@
     overflow: hidden;
 
     margin: 64px 0;
+
+    background-color:gainsboro;
 }
 
 .post-content{
     width: auto;
+    background-color: white;
 }
 
 .post-info{
@@ -76,6 +79,10 @@
 
 @media only screen and (max-width: 576px), (max-height: 576px) {
     .post-content{
+        width: 300px;
+    }
+
+    .post{
         width: 300px;
     }
 }

@@ -44,10 +44,6 @@ export default function Header(props) {
     }
   }
 
-  useEffect(() => {
-    console.log(`open menu: ${openMenu}`);
-  }, [openMenu]);
-
   return (
     <header className='page-cap' >
       <RoundButton img={props.profilePic} />
