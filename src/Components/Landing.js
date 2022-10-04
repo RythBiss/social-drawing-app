@@ -11,12 +11,7 @@ export default function Home(props) {
 
     const toSignin = () => {
         nav('/Signin');
-    }
-
-    useEffect(() => {
-        props.renderHeaders(false);
-    }, [])
-    
+    }    
 
   return (
     <div className='home-container'>

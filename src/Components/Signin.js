@@ -48,10 +48,6 @@ export default function Signin(props) {
         console.log()
     });
 
-    useEffect(() => {
-        props.renderHeaders(false);
-    }, [])
-
     return (
         <div className='auth-component'>
             <h1>Sign In</h1>

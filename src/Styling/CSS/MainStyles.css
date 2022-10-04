@@ -132,14 +132,9 @@
   text-shadow: 1px 1px rgba(0, 0, 0, 0.25);
 }
 
-@media only screen and (min-width: 576px) {
+@media only screen and (max-width: 576px), (max-height: 576px) {
   .post-content {
-    width: 512px;
-  }
-}
-@media only screen and (max-height: 576px) {
-  .post-content {
-    width: 256px;
+    width: 300px;
   }
 }
 .canvas-container {
@@ -274,10 +269,6 @@ input {
 input:focus {
   outline: none;
   border: 1px solid #C24BD6;
-}
-
-ul {
-  list-style: none;
 }
 
 a {

@@ -9,13 +9,22 @@ import Home from './Components/Home';
 import Drawing from './Components/Drawing';
 import Following from './Components/Following';
 import History from './Components/History';
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase-config';
 
 function App() {
 
   //hides or shows header and footer
-  const  [authorized, setAuthorized] = useState(true);
-
+  const  [authorized, setAuthorized] = useState(false);
   const [profilePic, setProfilePic] = useState('https://i.kym-cdn.com/photos/images/facebook/001/896/232/2a0.jpg');
+
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      setAuthorized(true);
+    }else{
+      setAuthorized(false);
+    }
+  });
 
   return (
     <Router>
@@ -23,13 +32,13 @@ function App() {
         {authorized && <Header profilePic={profilePic} />}
         <div className='page'>
           <Routes>
-            <Route path='/' element={<Landing renderHeaders={setAuthorized} />} />
-            <Route path='/Signin' element={<Signin renderHeaders={setAuthorized} />} />
-            <Route path='/Signup' element={<Signup renderHeaders={setAuthorized} />} />
-            <Route path='/Home' element={<Home renderHeaders={setAuthorized} />} />
-            <Route path='/Draw' element={<Drawing renderHeaders={setAuthorized} />} />
-            <Route path='/Following' element={<Following renderHeaders={setAuthorized} />} />
-            <Route path='/History' element={<History renderHeaders={setAuthorized} />} />
+            <Route path='/' element={<Landing />} />
+            <Route path='/Signin' element={<Signin />} />
+            <Route path='/Signup' element={<Signup />} />
+            <Route path='/Home' element={<Home />} />
+            <Route path='/Draw' element={<Drawing />} />
+            <Route path='/Following' element={<Following />} />
+            <Route path='/History' element={<History />} />
           </Routes>
         </div>
       </div>

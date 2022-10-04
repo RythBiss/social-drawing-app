@@ -6,8 +6,10 @@ import Brush from '../Images/Drawing Buttons/Brush.svg';
 import Pallet from '../Images/Drawing Buttons/Pallet.svg';
 import Erase from '../Images/Drawing Buttons/Erase.svg';
 import PenSettings from './PenSettings';
+import { storage } from '../firebase-config'
+import { ref, uploadBytes } from 'firebase/storage'
 
-export default function DrawingCanvas() {
+export default function DrawingCanvas(props) {
 
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
@@ -145,9 +147,18 @@ export default function DrawingCanvas() {
     }
 
     const submit = () => {
-        const win = window.open();
-        win.document.write(`<h1>Drawing Output</h1>`);
-        win.document.write(`<img src=${canvasRef.current.toDataURL('image/png')} />`);
+
+        const drawingRefFB = ref(
+            storage,
+            `drawings/canvas-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
+        );
+
+        canvasRef.current.toBlob((blob) => {
+            console.log(blob);
+            uploadBytes(drawingRefFB, blob).then(() => {
+                props.onCompletion();
+            });
+        });
     }
 
     //update effects

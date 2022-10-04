@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DrawingCanvas from './DrawingCanvas';
 
 
 export default function Drawing(props) {
 
-    useEffect(() => {
-      props.renderHeaders(true);
-    }, []);
+  const nav = useNavigate();
+
+  const toHome = () => {
+    nav('/Home');
+  }
 
   return (
         <div className='canvas-container'>
-          <DrawingCanvas />
+          <DrawingCanvas onCompletion={toHome} />
         </div>
   )
 }

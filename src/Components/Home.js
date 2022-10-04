@@ -15,7 +15,6 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    props.renderHeaders(true);
     loadPosts();
   }, [])
 

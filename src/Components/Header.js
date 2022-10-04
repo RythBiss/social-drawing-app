@@ -17,27 +17,32 @@ export default function Header(props) {
 
   const toHome = () => {
     nav('/Home');
+    toggleMenu();
   }
 
   const toDraw = () => {
     nav('/Draw');
+    toggleMenu();
   }
   
   const toFollowing = () => {
     nav('/Following');
+    toggleMenu();
   }
 
   const toHistory = () => {
     nav('/History');
+    toggleMenu();
   }
 
   const logOut = async() => {
     try{
         await signOut(auth).then(nav('/'));
+        toggleMenu();
     }catch(e){
         console.log(e.message);
     }
-}
+  }
 
   useEffect(() => {
     console.log(`open menu: ${openMenu}`);

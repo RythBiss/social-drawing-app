@@ -56,10 +56,6 @@ export default function Signup(props) {
         console.log(`${userValue} / ${passValue} / ${confirmValue}`);
     }, [userValue, passValue, confirmValue]);
 
-    useEffect(() => {
-        props.renderHeaders(false);
-    }, [])
-
     return (
         <div className='auth-component'>
             <h1>Sign Up</h1>
