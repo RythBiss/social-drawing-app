@@ -6,8 +6,9 @@ import Brush from '../Images/Drawing Buttons/Brush.svg';
 import Pallet from '../Images/Drawing Buttons/Pallet.svg';
 import Erase from '../Images/Drawing Buttons/Erase.svg';
 import PenSettings from './PenSettings';
-import { storage } from '../firebase-config'
-import { ref, uploadBytes } from 'firebase/storage'
+import { auth, storage } from '../firebase-config'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { postDrawing } from '../Functions/API';
 
 export default function DrawingCanvas(props) {
 
@@ -147,18 +148,8 @@ export default function DrawingCanvas(props) {
     }
 
     const submit = () => {
-
-        const drawingRefFB = ref(
-            storage,
-            `drawings/canvas-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
-        );
-
-        canvasRef.current.toBlob((blob) => {
-            console.log(blob);
-            uploadBytes(drawingRefFB, blob).then(() => {
-                props.onCompletion();
-            });
-        });
+        postDrawing(canvasRef.current);
+        props.onCompletion();
     }
 
     //update effects
@@ -216,9 +207,11 @@ export default function DrawingCanvas(props) {
     }, [eraserOn]);
 
     useLayoutEffect(() => {
-        window.addEventListener('resize', () => {if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth)});
+        const resizeListener = () => { if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth) }
 
-        return () => window.removeEventListener('resize', () => {if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth)});
+        window.addEventListener('resize', resizeListener);
+
+        return () => window.removeEventListener('resize', resizeListener);
     });
 
     //-------------------------------------------------------

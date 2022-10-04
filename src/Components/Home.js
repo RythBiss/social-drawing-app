@@ -16,7 +16,7 @@ export default function Home(props) {
 
   useEffect(() => {
     loadPosts();
-  }, [])
+  }, []);
 
   useEffect(() => {
     //remember, strict mode has been disabled!
