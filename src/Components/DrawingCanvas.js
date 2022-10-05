@@ -6,12 +6,9 @@ import Brush from '../Images/Drawing Buttons/Brush.svg';
 import Pallet from '../Images/Drawing Buttons/Pallet.svg';
 import Erase from '../Images/Drawing Buttons/Erase.svg';
 import PenSettings from './PenSettings';
-import { auth, storage } from '../firebase-config'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { postDrawing } from '../Functions/API';
 
 export default function DrawingCanvas(props) {
-
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
     const [isDrawing, setIsDrawing] = useState(false);
@@ -96,7 +93,6 @@ export default function DrawingCanvas(props) {
         if(history.length > 0){
             const canvas = canvasRef.current;
             const context = canvas.getContext('2d');
-
             context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
             //creates temporary array, pops it, then sets 'History' to the popped array.
@@ -130,7 +126,7 @@ export default function DrawingCanvas(props) {
 
     const pickColor = (color) => {
         //turns off eraser if a color is selected.
-        if(color) setEraserOn(false);
+        if(color) { setEraserOn(false); }
 
         setHex(color);
 
@@ -174,14 +170,13 @@ export default function DrawingCanvas(props) {
 
     //redraw when history changes
     useEffect(() => {
-
         history.forEach(path => {
             contextRef.current.beginPath();
+            contextRef.current.moveTo(path.tempPath[0].x, path.tempPath[0].y);
             contextRef.current.strokeStyle = path.hex;
             contextRef.current.lineWidth = path.penWidth;
             path.eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
             
-            contextRef.current.moveTo(path.tempPath[0].x, path.tempPath[0].y);
 
             path.tempPath.forEach(point => {
                 generateStroke(point.x, point.y);
@@ -189,6 +184,8 @@ export default function DrawingCanvas(props) {
         });
 
         contextRef.current.strokeStyle = hex;
+        contextRef.current.lineWidth = penWidth;
+        eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
     }, [history]);
 
     //update canvas stroke color
@@ -205,6 +202,7 @@ export default function DrawingCanvas(props) {
     useEffect(() => {
         eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
     }, [eraserOn]);
+
 
     useLayoutEffect(() => {
         const resizeListener = () => { if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth) }

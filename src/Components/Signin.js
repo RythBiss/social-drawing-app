@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
 
-export default function Signin(props) {
+export default function Signin() {
 
     //these will not be stored in plain text, develop a more secure solution when backend is up.
     //firebase handles encryption. Just make the API call with the data and don't save it anywhere.
@@ -20,28 +20,17 @@ export default function Signin(props) {
         nav('/Home');
     }
 
-    const logout = async() => {
-        try{
-            await signOut(auth);
-        }catch(e){
-            console.log(e.message)
-        }
-    }
-
     const submitCredentials = async(event) => {
         event.preventDefault();
 
         console.log('Submited');
 
         try{
-            const newUser = await signInWithEmailAndPassword(auth, userValue, passValue);
-            console.log(newUser);
-            toHome();
+            const newUser = await signInWithEmailAndPassword(auth, userValue, passValue)
+            .then(toHome());
         }catch(e){
             console.log(e.message);
         }
-
-
     }
 
     useEffect(() => {
@@ -59,7 +48,6 @@ export default function Signin(props) {
                 <button type="submit" onClick={submitCredentials}>Sign In</button>
             </form>
             <Link to='/Signup' >Need an account?</Link>
-            <button onClick={logout}>logout</button>
         </div>
     )
 }

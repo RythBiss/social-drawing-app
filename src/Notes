@@ -1,0 +1,10 @@
+Big Tasks:
+1 - History page loads only the signed in users posts, displays in a grid.
+2 - When you click on a post, it should take you to the users page.
+3 - Star functionality: click to give post a star, click again to revoke star.
+
+Bugs:
+1 - Menu causes whole page to get a scroll bar, it should not.
+2 - Undo sometimes causes stroke to appear different. Hard to replicate.
+3 - Can't see stars on smaller resolutions.
+4 - Posts are loaded oldest to newest, should be reverse.

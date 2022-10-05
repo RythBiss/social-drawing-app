@@ -25,16 +25,16 @@ function App() {
       setAuthorized(false);
     }
   });
-
+  
   return (
     <Router>
       <div className="App">
-        {authorized && <Header profilePic={profilePic} />}
+        <Header profilePic={profilePic} renderHeader={authorized} setAuthorized={setAuthorized} />
         <div className='page'>
           <Routes>
             <Route path='/' element={<Landing />} />
-            <Route path='/Signin' element={<Signin />} />
-            <Route path='/Signup' element={<Signup />} />
+            <Route path='/Signin' element={<Signin />} setAuthorized={setAuthorized} />
+            <Route path='/Signup' element={<Signup />} setAuthorized={setAuthorized} />
             <Route path='/Home' element={<Home />} />
             <Route path='/Draw' element={<Drawing />} />
             <Route path='/Following' element={<Following />} />
