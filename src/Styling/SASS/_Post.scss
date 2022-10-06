@@ -1,13 +1,16 @@
 @use 'GlobalVariables';
 
 .post{
-    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
 
+    border-radius: 4px;
     @extend %even-shadow;
 
     overflow: hidden;
 
-    margin: 8px 0;
+    margin: 8px auto;
+    width: fit-content;
 
     background-color:gainsboro;
 }
@@ -28,6 +31,7 @@
         color: GlobalVariables.$bg-color;
         font-size: 1.5rem;
         text-align: left;
+        overflow: hidden;
     }
 
     > .author-info{
@@ -77,9 +81,15 @@
     }
 }
 
-@media only screen and (max-width: 576px), (max-height: 576px) {
+@media (max-width: 576px), (max-height: 576px) {
     .post-content{
         width: 300px;
+    }
+
+    .post-info{
+        h1{
+            max-width: 170px;
+        }
     }
 
     .post{

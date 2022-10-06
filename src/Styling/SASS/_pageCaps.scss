@@ -11,11 +11,17 @@
     padding: 4px;
 
     @extend %even-shadow;
+
+    background-color: GlobalVariables.$primary-color;
+
+    > h1{
+        color: GlobalVariables.$bg-color;
+    }
 }
 
 .main-menu{
     @extend %even-shadow;
-    background-color: GlobalVariables.$bg-color;
+    background-color: GlobalVariables.$primary-color;
     position: absolute;
 
     right: 0;
@@ -23,7 +29,7 @@
     
     padding-top: 64px;
 
-    width: 60%;
+    width: fit-content;
     height: 100vh;
     min-height: calc(48 * 5px);
 
@@ -33,12 +39,16 @@
         align-items: center;
 
         padding: 16px;
-        font-size: 2rem;
 
-        border-top: 1px solid GlobalVariables.$text-color;
+        width: 250px;
+
+        font-size: 2rem;
+        color: GlobalVariables.$bg-color;
+
+        border-top: 1px solid GlobalVariables.$bg-color;
     }
 
     .li-last{
-        border-bottom: 1px solid GlobalVariables.$text-color;
+        border-bottom: 1px solid GlobalVariables.$bg-color;
     }
 }

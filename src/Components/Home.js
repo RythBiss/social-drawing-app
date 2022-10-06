@@ -12,8 +12,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-        {mapPosts(posts)}
+    <div className='feed'>
+      {mapPosts(posts)}
+      <footer>
+        Pen Post
+      </footer>
     </div>
   )
 }

@@ -20,7 +20,7 @@ sass --watch src/Styling/SASS:src/Styling/CSS
 //---------------------------------------------------
 
 button{
-    border: 1px solid GlobalVariables.$primary-color;
+    border: none;
     border-radius: 1rem;
 
     width:75%;
@@ -29,7 +29,8 @@ button{
 
     z-index: 1;
 
-    background-color: GlobalVariables.$bg-color;
+    color: GlobalVariables.$bg-color;
+    background-color: GlobalVariables.$primary-color;
 }
 
 button:hover{
@@ -38,7 +39,6 @@ button:hover{
 }
 
 button:active{
-    background-color: GlobalVariables.$primary-color-light;
     scale: 0.9;
 }
 
@@ -57,7 +57,15 @@ button:active{
     justify-content: center;
     align-items: center;
 
-    @extend %shadow;
+    @extend %even-shadow;
+}
+
+.white{
+    background-color: white;
+}
+
+.white:hover{
+    background-color: GlobalVariables.$hover-color-2;
 }
 
 //---------------------------------------------------
@@ -100,6 +108,8 @@ a{
     justify-content: space-between;
 
     height: 100vh;
+
+    overflow-y: hidden;
 }
 
 .page{
@@ -109,6 +119,25 @@ a{
     height: 100%;
 
     overflow-y: scroll;
+}
+
+.feed{
+    width: 100%;
+}
+
+footer{
+    height: 256px;
+    width: 100%;
+
+    margin-top: 256px;
+
+    background-color: GlobalVariables.$primary-color;
+    color: white;
+    font-size: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 //---------------------------------------------------

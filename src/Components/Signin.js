@@ -37,7 +37,7 @@ export default function Signin() {
             <form onSubmit={submitCredentials} >
                 <input type='text' name='username' placeholder='Username' value={userValue} onChange={event => setUserValue(event.target.value)} /><br/>
 
-                <input type='text' name='password' placeholder='Password' value={passValue} onChange={event => setPassValue(event.target.value)} /><br/>
+                <input type='password' name='password' placeholder='Password' value={passValue} onChange={event => setPassValue(event.target.value)} /><br/>
 
                 <button type="submit" onClick={submitCredentials}>Sign In</button>
             </form>

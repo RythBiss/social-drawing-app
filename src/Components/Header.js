@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RoundButton from './RoundButton';
 import MenuIcon from '../Images/Common/MenuIcon.svg';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 
@@ -48,11 +48,12 @@ export default function Header(props) {
   useEffect(() => {
     if(auth.currentUser){
       setRenderHeader(true);
+      console.log('auth ', auth)
      }else{
       setRenderHeader(false);
+      console.log('auth ', auth)
       nav('/');
      }
-    console.log(renderHeader);
   }, [auth.currentUser]);
 
   return (
@@ -70,7 +71,7 @@ export default function Header(props) {
               <li className='li-last' onClick={logOut}>Sign Out</li>
             </ul>
           }
-          <RoundButton img={MenuIcon} onClick={toggleMenu} />
+          <RoundButton img={MenuIcon} onClick={toggleMenu}  color='white' />
         </header>
       }
     </>

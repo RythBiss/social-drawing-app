@@ -9,8 +9,6 @@ import Home from './Components/Home';
 import Drawing from './Components/Drawing';
 import Following from './Components/Following';
 import History from './Components/History';
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './firebase-config';
 
 function App() {
 

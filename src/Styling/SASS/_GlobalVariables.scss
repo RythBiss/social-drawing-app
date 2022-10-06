@@ -1,13 +1,13 @@
 $primary-color: #C24BD6;
-$primary-color-light: #ec83ff;
 $bg-color: #FFFFFF;
 $text-color: #9E9E9E;
-$hover-color: #f8d1ff;
+$hover-color: #e47bf7;
+$hover-color-2: rgb(222, 222, 222);
 
 %shadow{
     box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
 }
 
 %even-shadow{
-    box-shadow: 0 0 4px rgb(0, 0, 0, 0.25);
+    box-shadow: 0 0 8px rgb(0, 0, 0, 0.25);
 }

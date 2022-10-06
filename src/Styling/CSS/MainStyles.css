@@ -1,9 +1,5 @@
-.round-button {
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-.post, .page-cap, .main-menu {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+.round-button, .post, .page-cap, .main-menu {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 }
 
 .auth-component {
@@ -36,15 +32,19 @@
   align-items: center;
   height: 56px;
   padding: 4px;
+  background-color: #C24BD6;
+}
+.page-cap > h1 {
+  color: #FFFFFF;
 }
 
 .main-menu {
-  background-color: #FFFFFF;
+  background-color: #C24BD6;
   position: absolute;
   right: 0;
   top: 0;
   padding-top: 64px;
-  width: 60%;
+  width: fit-content;
   height: 100vh;
   min-height: 240px;
 }
@@ -53,11 +53,13 @@
   justify-content: right;
   align-items: center;
   padding: 16px;
+  width: 250px;
   font-size: 2rem;
-  border-top: 1px solid #9E9E9E;
+  color: #FFFFFF;
+  border-top: 1px solid #FFFFFF;
 }
 .main-menu .li-last {
-  border-bottom: 1px solid #9E9E9E;
+  border-bottom: 1px solid #FFFFFF;
 }
 
 .home-container {
@@ -79,9 +81,12 @@
 }
 
 .post {
+  display: flex;
+  flex-direction: column;
   border-radius: 4px;
   overflow: hidden;
-  margin: 8px 0;
+  margin: 8px auto;
+  width: fit-content;
   background-color: gainsboro;
 }
 
@@ -100,6 +105,7 @@
   color: #FFFFFF;
   font-size: 1.5rem;
   text-align: left;
+  overflow: hidden;
 }
 .post-info > .author-info {
   display: flex;
@@ -134,9 +140,12 @@
   text-shadow: 1px 1px rgba(0, 0, 0, 0.25);
 }
 
-@media only screen and (max-width: 576px), (max-height: 576px) {
+@media (max-width: 576px), (max-height: 576px) {
   .post-content {
     width: 300px;
+  }
+  .post-info h1 {
+    max-width: 170px;
   }
   .post {
     width: 300px;
@@ -227,21 +236,21 @@ sass --watch src/Styling/SASS:src/Styling/CSS
 }
 
 button {
-  border: 1px solid #C24BD6;
+  border: none;
   border-radius: 1rem;
   width: 75%;
   padding: 8px;
   z-index: 1;
-  background-color: #FFFFFF;
+  color: #FFFFFF;
+  background-color: #C24BD6;
 }
 
 button:hover {
-  background-color: #f8d1ff;
+  background-color: #e47bf7;
   color: #FFFFFF;
 }
 
 button:active {
-  background-color: #ec83ff;
   scale: 0.9;
 }
 
@@ -254,6 +263,14 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.white {
+  background-color: white;
+}
+
+.white:hover {
+  background-color: rgb(222, 222, 222);
 }
 
 form {
@@ -285,6 +302,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  overflow-y: hidden;
 }
 
 .page {
@@ -292,6 +310,22 @@ a {
   justify-content: center;
   height: 100%;
   overflow-y: scroll;
+}
+
+.feed {
+  width: 100%;
+}
+
+footer {
+  height: 256px;
+  width: 100%;
+  margin-top: 256px;
+  background-color: #C24BD6;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (min-width: 600px) {
