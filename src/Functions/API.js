@@ -4,6 +4,10 @@ import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where } f
 
 const postsTableRef = collection(database, 'posts');
 
+const createPost = async(author, url) => {
+    await addDoc(postsTableRef, { author_id: author, image_url: url, prompt: 'feature is WIP', stars: 0, date_time: serverTimestamp() });
+}
+
 export const getPosts = async(setPosts) => {
     const postQuery = query(postsTableRef, orderBy('date_time', 'desc'));
     const response = await getDocs(postQuery);
@@ -38,9 +42,4 @@ export const postDrawing = async(canvas) => {
             });
         });
     });
-}
-
-const createPost = async(author, url) => {
-    
-    await addDoc(postsTableRef, { author_id: author, image_url: url, prompt: 'feature is WIP', stars: 0, date_time: serverTimestamp() });
 }

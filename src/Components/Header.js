@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import RoundButton from './RoundButton';
 import MenuIcon from '../Images/Common/MenuIcon.svg';
-import { signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
 
+  const [renderHeader, setRenderHeader] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const nav = useNavigate();
 
@@ -35,18 +36,28 @@ export default function Header(props) {
   }
 
   const logOut = async() => {
-    try{
-      toggleMenu();
+    signOut(auth).then(() => {
+      console.log('Done!')
       nav('/');
-      await signOut(auth);
-    }catch(e){
-        console.log(e.message);
-    }
+      toggleMenu();
+    }).catch((error) => {
+      console.log(error)
+    });
   }
+
+  useEffect(() => {
+    if(auth.currentUser){
+      setRenderHeader(true);
+     }else{
+      setRenderHeader(false);
+      nav('/');
+     }
+    console.log(renderHeader);
+  }, [auth.currentUser]);
 
   return (
     <>
-      {props.renderHeader &&
+      {renderHeader &&
         <header className='page-cap' >
           <RoundButton img={props.profilePic} />
           <h1>Pen Post</h1>

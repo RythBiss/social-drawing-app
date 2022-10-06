@@ -15,28 +15,17 @@ import { auth } from './firebase-config';
 function App() {
 
   //hides or shows header and footer
-  const  [authorized, setAuthorized] = useState(false);
   const [profilePic, setProfilePic] = useState('https://i.kym-cdn.com/photos/images/facebook/001/896/232/2a0.jpg');
-  const [email, setEmail] = useState(null);
-
-  onAuthStateChanged(auth, (user) => {
-    if(user){
-      setAuthorized(true);
-      setEmail(user.email);
-    }else{
-      setAuthorized(false);
-    }
-  });
   
   return (
     <Router>
       <div className="App">
-        <Header profilePic={profilePic} renderHeader={authorized} setAuthorized={setAuthorized} />
+        <Header profilePic={profilePic} />
         <div className='page'>
           <Routes>
             <Route path='/' element={<Landing />} />
-            <Route path='/Signin' element={<Signin />} setAuthorized={setAuthorized} />
-            <Route path='/Signup' element={<Signup />} setAuthorized={setAuthorized} />
+            <Route path='/Signin' element={<Signin />} />
+            <Route path='/Signup' element={<Signup />} />
             <Route path='/Home' element={<Home />} />
             <Route path='/Draw' element={<Drawing />} />
             <Route path='/Following' element={<Following />} />

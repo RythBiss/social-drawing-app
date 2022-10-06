@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
@@ -23,19 +23,13 @@ export default function Signin() {
     const submitCredentials = async(event) => {
         event.preventDefault();
 
-        console.log('Submited');
-
         try{
-            const newUser = await signInWithEmailAndPassword(auth, userValue, passValue)
-            .then(toHome());
+            await signInWithEmailAndPassword(auth, userValue, passValue);
+            toHome();
         }catch(e){
-            console.log(e.message);
+            console.log(e.message)
         }
     }
-
-    useEffect(() => {
-        console.log()
-    });
 
     return (
         <div className='auth-component'>

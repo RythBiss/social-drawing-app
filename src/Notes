@@ -8,3 +8,4 @@ Bugs:
 2 - Undo sometimes causes stroke to appear different. Hard to replicate.
 3 - Can't see stars on smaller resolutions.
 4 - Posts are loaded oldest to newest, should be reverse.
+5 - Signout freezes the app.
