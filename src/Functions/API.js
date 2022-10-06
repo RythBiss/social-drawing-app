@@ -1,13 +1,25 @@
 import { auth, storage, database } from '../firebase-config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where } from 'firebase/firestore';
 
-const baseURL = 'https://jsonplaceholder.typicode.com';
 const postsTableRef = collection(database, 'posts');
 
 export const getPosts = async(setPosts) => {
-    const response = await getDocs(postsTableRef);
+    const postQuery = query(postsTableRef, orderBy('date_time', 'desc'));
+    const response = await getDocs(postQuery);
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
+  }
+
+export const getHistory = async(setPosts) => {
+         // const postQuery = query(postDatabase, orderBy('date_time', 'desc'), where("author_id", "==", `${auth.currentUser.email}`));
+    const postQuery = query(postsTableRef, where("author_id", "==", `${auth.currentUser.email}`), orderBy('date_time', 'desc'));
+
+    const loadHistory = async() => {
+    const response = await getDocs(postQuery);
+    setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
+    }
+
+    loadHistory();
   }
 
 export const postDrawing = async(canvas) => {
@@ -29,5 +41,6 @@ export const postDrawing = async(canvas) => {
 }
 
 const createPost = async(author, url) => {
-    await addDoc(postsTableRef, { author_id: author, image_url: url, prompt: 'feature is WIP', stars: 0 });
+    
+    await addDoc(postsTableRef, { author_id: author, image_url: url, prompt: 'feature is WIP', stars: 0, date_time: serverTimestamp() });
 }

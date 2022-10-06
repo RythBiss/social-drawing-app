@@ -17,10 +17,12 @@ function App() {
   //hides or shows header and footer
   const  [authorized, setAuthorized] = useState(false);
   const [profilePic, setProfilePic] = useState('https://i.kym-cdn.com/photos/images/facebook/001/896/232/2a0.jpg');
+  const [email, setEmail] = useState(null);
 
   onAuthStateChanged(auth, (user) => {
     if(user){
       setAuthorized(true);
+      setEmail(user.email);
     }else{
       setAuthorized(false);
     }

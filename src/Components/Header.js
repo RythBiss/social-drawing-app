@@ -3,13 +3,12 @@ import RoundButton from './RoundButton';
 import MenuIcon from '../Images/Common/MenuIcon.svg';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
 
   const [openMenu, setOpenMenu] = useState(false);
   const nav = useNavigate();
-  const location = useLocation();
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
@@ -38,8 +37,8 @@ export default function Header(props) {
   const logOut = async() => {
     try{
       toggleMenu();
-      await signOut(auth)
-      .then(nav('/'));
+      nav('/');
+      await signOut(auth);
     }catch(e){
         console.log(e.message);
     }
