@@ -29,7 +29,7 @@ button{
 
     z-index: 1;
 
-    color: GlobalVariables.$bg-color;
+    color: GlobalVariables.$text-color-2;
     background-color: GlobalVariables.$primary-color;
 }
 
@@ -109,6 +109,7 @@ a{
 
     height: 100vh;
 
+    background-color: GlobalVariables.$bg-color;
     overflow-y: hidden;
 }
 

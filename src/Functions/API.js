@@ -5,25 +5,27 @@ import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where } f
 const postsTableRef = collection(database, 'posts');
 
 const createPost = async(author, url) => {
-    await addDoc(postsTableRef, { author_id: author, image_url: url, prompt: 'feature is WIP', stars: 0, date_time: serverTimestamp() });
+    await addDoc(postsTableRef,{
+        author_id: author,
+        image_url: url,
+        prompt: 'feature is WIP',
+        stars: 0,
+        date_time: serverTimestamp()
+    });
 }
 
 export const getPosts = async(setPosts) => {
     const postQuery = query(postsTableRef, orderBy('date_time', 'desc'));
     const response = await getDocs(postQuery);
+
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
   }
 
 export const getHistory = async(setPosts) => {
-         // const postQuery = query(postDatabase, orderBy('date_time', 'desc'), where("author_id", "==", `${auth.currentUser.email}`));
     const postQuery = query(postsTableRef, where("author_id", "==", `${auth.currentUser.email}`), orderBy('date_time', 'desc'));
-
-    const loadHistory = async() => {
     const response = await getDocs(postQuery);
+    
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
-    }
-
-    loadHistory();
   }
 
 export const postDrawing = async(canvas) => {
@@ -33,7 +35,7 @@ export const postDrawing = async(canvas) => {
     );
 
     canvas.toBlob((blob) => {
-        let author = auth.currentUser.email;
+        const author = auth.currentUser.email;
 
         uploadBytes(drawingRefFB, blob).then(() => {
             getDownloadURL(ref(storage, drawingRefFB._location.path_))

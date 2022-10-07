@@ -28,7 +28,7 @@
     background-color: GlobalVariables.$primary-color;
 
     h1{
-        color: GlobalVariables.$bg-color;
+        color: GlobalVariables.$text-color-2;
         font-size: 1.5rem;
         text-align: left;
         overflow: hidden;
@@ -51,19 +51,19 @@
 .stars{
     $size: 50px;
 
-    display: grid;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     width: $size;
     height: $size;
 
     margin: 8px;
 
-    > .star-part{
-        grid-column: 1;
-        grid-row: 1;
-    
-        margin: auto;
-
+    border-radius: 50%;
+    > .star-part{ 
+        position: absolute;
         width: 100%;
     }
 

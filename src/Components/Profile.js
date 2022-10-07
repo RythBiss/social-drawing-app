@@ -14,12 +14,6 @@ export default function History() {
      }
   }, [auth.currentUser]);
 
-  useEffect(() => {
-    if(posts){
-      console.log(posts);
-    }
-  }, [posts])
-
   return (
     <div>{mapPosts(posts)}</div>
   )

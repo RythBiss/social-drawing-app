@@ -30,14 +30,13 @@ export default function Header(props) {
     toggleMenu();
   }
 
-  const toHistory = () => {
-    nav('/History');
+  const toProfile = () => {
+    nav('/Profile');
     toggleMenu();
   }
 
   const logOut = async() => {
     signOut(auth).then(() => {
-      console.log('Done!')
       nav('/');
       toggleMenu();
     }).catch((error) => {
@@ -48,10 +47,8 @@ export default function Header(props) {
   useEffect(() => {
     if(auth.currentUser){
       setRenderHeader(true);
-      console.log('auth ', auth)
      }else{
       setRenderHeader(false);
-      console.log('auth ', auth)
       nav('/');
      }
   }, [auth.currentUser]);
@@ -66,8 +63,8 @@ export default function Header(props) {
             <ul className='main-menu'>
               <li onClick={toHome}>Home</li>
               <li onClick={toDraw}>Draw</li>
+              <li onClick={toProfile}>Profile</li>
               <li onClick={toFollowing}>Following</li>
-              <li onClick={toHistory}>History</li>
               <li className='li-last' onClick={logOut}>Sign Out</li>
             </ul>
           }

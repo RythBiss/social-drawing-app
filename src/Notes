@@ -1,7 +1,7 @@
 Big Tasks:
-1 - [STARTED] History page loads only the signed in users posts, displays in a grid.
+1 - [DONE] History page loads only the signed in users posts.
 2 - When you click on a post, it should take you to the users page.
-3 - Star functionality: click to give post a star, click again to revoke star.
+3 - [DONE] Star functionality: click to give post a star, click again to revoke star.
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.
@@ -10,4 +10,6 @@ Bugs:
 3a - Text is cut off. Consider adding display names instead of using emails.
 4 - [FIXED] Posts are loaded oldest to newest, should be reverse.
 5 - [FIXED] Signout freezes the app.
-6 - [Fixed] Refresh sends user back to the landing screen.
+6 - Refresh sends user back to the landing screen.
+7 - All buttons render on top layer
+8 - Stars don't update visually until next API pull.

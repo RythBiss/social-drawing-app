@@ -8,7 +8,16 @@ import Landing from './Components/Landing';
 import Home from './Components/Home';
 import Drawing from './Components/Drawing';
 import Following from './Components/Following';
-import History from './Components/History';
+import Profile from './Components/Profile';
+
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.youtube.com/watch?v=tBXSrmwKla0
+Security Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
 
 function App() {
 
@@ -27,7 +36,7 @@ function App() {
             <Route path='/Home' element={<Home />} />
             <Route path='/Draw' element={<Drawing />} />
             <Route path='/Following' element={<Following />} />
-            <Route path='/History' element={<History />} />
+            <Route path='/Profile' element={<Profile />} />
           </Routes>
         </div>
       </div>

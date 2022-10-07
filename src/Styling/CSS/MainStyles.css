@@ -32,14 +32,14 @@
   align-items: center;
   height: 56px;
   padding: 4px;
-  background-color: #C24BD6;
+  background-color: #6f36da;
 }
 .page-cap > h1 {
-  color: #FFFFFF;
+  color: #f0f0f0;
 }
 
 .main-menu {
-  background-color: #C24BD6;
+  background-color: #6f36da;
   position: absolute;
   right: 0;
   top: 0;
@@ -55,11 +55,17 @@
   padding: 16px;
   width: 250px;
   font-size: 2rem;
-  color: #FFFFFF;
-  border-top: 1px solid #FFFFFF;
+  color: #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+}
+.main-menu > li:hover {
+  background-color: #965ffa;
+}
+.main-menu > li:active {
+  background-color: #4e3a86;
 }
 .main-menu .li-last {
-  border-bottom: 1px solid #FFFFFF;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .home-container {
@@ -99,10 +105,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #C24BD6;
+  background-color: #6f36da;
 }
 .post-info h1 {
-  color: #FFFFFF;
+  color: #f0f0f0;
   font-size: 1.5rem;
   text-align: left;
   overflow: hidden;
@@ -120,15 +126,17 @@
 }
 
 .stars {
-  display: grid;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50px;
   height: 50px;
   margin: 8px;
+  border-radius: 50%;
 }
 .stars > .star-part {
-  grid-column: 1;
-  grid-row: 1;
-  margin: auto;
+  position: absolute;
   width: 100%;
 }
 .stars > div {
@@ -159,13 +167,14 @@
   width: 500px;
   min-height: 500px;
   max-height: 500px;
-  border: 4px solid #C24BD6;
+  border: 4px solid #6f36da;
   border-radius: 4px;
 }
 
 .drawing-canvas {
   width: 100%;
   height: 500px;
+  background-color: #f0f0f0;
 }
 
 .button-row {
@@ -241,13 +250,13 @@ button {
   width: 75%;
   padding: 8px;
   z-index: 1;
-  color: #FFFFFF;
-  background-color: #C24BD6;
+  color: #f0f0f0;
+  background-color: #6f36da;
 }
 
 button:hover {
-  background-color: #e47bf7;
-  color: #FFFFFF;
+  background-color: #965ffa;
+  color: #383438;
 }
 
 button:active {
@@ -270,7 +279,7 @@ button:active {
 }
 
 .white:hover {
-  background-color: rgb(222, 222, 222);
+  background-color: #f0f0f0;
 }
 
 form {
@@ -290,7 +299,7 @@ input {
 
 input:focus {
   outline: none;
-  border: 1px solid #C24BD6;
+  border: 1px solid #6f36da;
 }
 
 a {
@@ -302,6 +311,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  background-color: #383438;
   overflow-y: hidden;
 }
 
@@ -320,7 +330,7 @@ footer {
   height: 256px;
   width: 100%;
   margin-top: 256px;
-  background-color: #C24BD6;
+  background-color: #6f36da;
   color: white;
   font-size: 2rem;
   display: flex;

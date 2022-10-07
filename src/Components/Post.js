@@ -1,8 +1,56 @@
-import React from 'react'
-import GoldStar from '../Images/GoldStar.svg'
+import React, { useEffect, useState } from 'react'
+import GoldStar from '../Images/Common/GoldStar.svg'
 import RoundButton from './RoundButton'
+import { auth, database } from '../firebase-config'
+import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 
 export default function Post(props) {
+
+    const [stars, setStars] = useState(props.stars);
+    const postRef = doc(database, 'posts', props.postId);
+
+    const getStars = async() => {
+        const postData = await getDoc(postRef);
+
+        if(postData.data().star_users){
+            setStars(postData.data().star_users.length);
+        }
+    }
+
+    const addStar = async() => {
+        await updateDoc(postRef, {
+            star_users: arrayUnion(auth.currentUser.uid)
+        }).then(() => {
+            console.log('add')
+            getStars();
+        });
+    }
+
+    const revokeStar = async() => {
+        await updateDoc(postRef, {
+            star_users: arrayRemove(auth.currentUser.uid)
+        }).then(() => {
+            console.log('revoke')
+            getStars();
+        });
+    }
+
+    const handleStarClick = async() => {
+        const postData = await getDoc(postRef);
+        
+        if(postData.data().star_users){
+            const searchUid = postData.data().star_users.find(element => element == auth.currentUser.uid);
+            if(searchUid === auth.currentUser.uid){
+                revokeStar();
+            }else{
+                addStar();
+            }
+        }else{
+            console.log('not found');
+            addStar();
+        }
+    }
+
   return (
     <div className='post'>
         <img className='post-content' src={props.content} alt='post' />
@@ -11,12 +59,12 @@ export default function Post(props) {
                 <RoundButton img='https://preview.redd.it/pcmfkxdynoj41.jpg?width=640&crop=smart&auto=webp&s=11a2d69c2c187c961c9743360c35073c26e926c3' />
                 <h1>{props.author}<br/>{props.prompt}</h1>
             </div>
-            <div className='stars'>
+            <button className='stars' onClick={handleStarClick}>
                 <img className='star-part' src={GoldStar} alt='star'/>
                 <div className='star-part'>
-                    <h1>{props.stars}</h1>
+                    <h1>{stars}</h1>
                 </div>
-            </div>
+            </button>
         </div>
     </div>
   )
