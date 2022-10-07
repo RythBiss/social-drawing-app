@@ -21,8 +21,8 @@ export const getPosts = async(setPosts) => {
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
   }
 
-export const getHistory = async(setPosts) => {
-    const postQuery = query(postsTableRef, where("author_id", "==", `${auth.currentUser.email}`), orderBy('date_time', 'desc'));
+export const getHistory = async(setPosts, user) => {
+    const postQuery = query(postsTableRef, where("author_id", "==", `${user}`), orderBy('date_time', 'desc'));
     const response = await getDocs(postQuery);
     
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));

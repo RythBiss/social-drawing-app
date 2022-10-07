@@ -36,7 +36,7 @@ function App() {
             <Route path='/Home' element={<Home />} />
             <Route path='/Draw' element={<Drawing />} />
             <Route path='/Following' element={<Following />} />
-            <Route path='/Profile' element={<Profile />} />
+            <Route path='/Profile' element={<Profile image={profilePic} />} />
           </Routes>
         </div>
       </div>

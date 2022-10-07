@@ -13,7 +13,9 @@ export default function Home() {
 
   return (
     <div className='feed'>
-      {mapPosts(posts)}
+      <div className='posts-container'>
+        {mapPosts(posts)}
+      </div>
       <footer>
         Pen Post
       </footer>

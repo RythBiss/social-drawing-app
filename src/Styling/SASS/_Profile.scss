@@ -1,0 +1,35 @@
+@use 'GlobalVariables';
+
+.profile-container{
+    width: 100%;
+}
+
+.profile-block{
+    height: 256px;
+    width: 100%;
+    margin: 32px 0;
+
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+}
+
+.profile-image{
+    width: 100%;
+}
+
+.image-frame{
+    height: 90%;
+    aspect-ratio: 1;
+    margin: 16px;
+
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.history{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

@@ -4,10 +4,11 @@ sass --watch src/Styling/SASS:src/Styling/CSS
 
 @use 'GlobalVariables';
 @use 'Authentication';
-@use 'pageCaps';
+@use 'PageCaps';
 @use 'Home';
 @use 'Post';
 @use 'Drawing';
+@use 'Profile';
 
 *{
     margin: 0;
@@ -79,6 +80,7 @@ form{
 input{
     border: 1px solid GlobalVariables.$text-color;
     border-radius: 4px;
+    background-color: GlobalVariables.$hover-color-2;
 
     height: 1.5rem;
 
@@ -124,6 +126,11 @@ a{
 
 .feed{
     width: 100%;
+}
+
+.posts-container{
+    width: fit-content;
+    margin: auto;
 }
 
 footer{
