@@ -1,7 +1,9 @@
 Big Tasks:
 1 - [DONE] History page loads only the signed in users posts.
-2 - When you click on a post, it should take you to the users page.
+2 - [DONE] When you click on a post, it should take you to the users page.
 3 - [DONE] Star functionality: click to give post a star, click again to revoke star.
+4 - [DONE] On sign up, allow users to create a user name using 'auth.currentUser.displayName'. Also let users update their profile image using the same method.
+    https://skaaptjop.medium.com/understanding-firebase-auth-profiles-f162605a1aed
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.
@@ -11,5 +13,6 @@ Bugs:
 4 - [FIXED] Posts are loaded oldest to newest, should be reverse.
 5 - [FIXED] Signout freezes the app.
 6 - Refresh sends user back to the landing screen.
-7 - All buttons render on top layer
-8 - Stars don't update visually until next API pull.
+7 - [FIXED] All buttons render on top layer.
+8 - [FIXED] Stars don't update visually until next API pull.
+9 - Clicking the top left profile button toggles the menu.

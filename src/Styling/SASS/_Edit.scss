@@ -1,0 +1,74 @@
+@use 'GlobalVariables';
+
+%edit-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px
+}
+
+.edit-container{
+    width: 75%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.edit-pic{
+    @extend %purple-content;
+    width: 100%;
+
+    > div{
+    @extend %edit-div;
+        > *{
+            margin: 0 8px;
+            width: fit-content
+        }
+    }
+}
+
+.edit-name{
+    @extend %purple-content;
+    width: 100%;
+
+    > div{
+        @extend %edit-div;
+        flex-direction: column;
+        width: 100%;
+
+        > input{
+            background-color: GlobalVariables.$bg-color;
+            width: 100%;
+            border: none;
+        }
+    }
+}
+
+#upload{
+    display: none;
+}
+
+label{
+    border: none;
+    border-radius: 1rem;
+
+    width:75%;
+
+    padding: 8px;
+
+    color: GlobalVariables.$text-color-2;
+    background-color: GlobalVariables.$primary-color;
+    text-shadow: none;
+    @extend %button-font;
+}
+
+label:hover{
+    background-color: GlobalVariables.$hover-color;
+    color: GlobalVariables.$bg-color;
+}
+
+label:active{
+    scale: 0.9;
+}

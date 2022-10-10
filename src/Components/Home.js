@@ -13,6 +13,7 @@ export default function Home() {
 
   return (
     <div className='feed'>
+      <h1>Home</h1>
       <div className='posts-container'>
         {mapPosts(posts)}
       </div>

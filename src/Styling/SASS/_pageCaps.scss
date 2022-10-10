@@ -17,12 +17,17 @@
     > h1{
         color: GlobalVariables.$text-color-2;
     }
+
+    > button{
+        z-index: 1;
+    }
 }
 
 .main-menu{
     @extend %even-shadow;
     background-color: GlobalVariables.$primary-color;
     position: absolute;
+    z-index: 1;
 
     right: 0;
     top: 0;

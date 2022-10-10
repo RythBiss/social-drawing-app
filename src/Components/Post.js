@@ -66,12 +66,12 @@ export default function Post(props) {
         <div className='post-info' >
             <div className='author-info'>
                 <RoundButton img='https://preview.redd.it/pcmfkxdynoj41.jpg?width=640&crop=smart&auto=webp&s=11a2d69c2c187c961c9743360c35073c26e926c3' onClick={handleProfileClick} />
-                <h1>{props.author}<br/>{props.prompt}</h1>
+                <h3>{props.author}<br/>{props.prompt}</h3>
             </div>
             <button className='stars' onClick={handleStarClick}>
                 <img className='star-part' src={GoldStar} alt='star'/>
                 <div className='star-part'>
-                    <h1>{stars}</h1>
+                    <h3>{stars}</h3>
                 </div>
             </button>
         </div>

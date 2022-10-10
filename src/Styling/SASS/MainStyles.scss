@@ -9,6 +9,7 @@ sass --watch src/Styling/SASS:src/Styling/CSS
 @use 'Post';
 @use 'Drawing';
 @use 'Profile';
+@use 'Edit';
 
 *{
     margin: 0;
@@ -23,12 +24,11 @@ sass --watch src/Styling/SASS:src/Styling/CSS
 button{
     border: none;
     border-radius: 1rem;
-
+    @extend %button-font;
+    
     width:75%;
 
     padding: 8px;
-
-    z-index: 1;
 
     color: GlobalVariables.$text-color-2;
     background-color: GlobalVariables.$primary-color;
@@ -51,6 +51,7 @@ button:active{
     border-radius: calc($size/2);
 
     overflow: hidden;
+    background-color: GlobalVariables.$canvas;
 
     margin: 8px;
 
@@ -102,6 +103,11 @@ a{
     margin: 16px;
 }
 
+h1{
+    text-align: center;
+    margin-top: 30px;
+}
+
 //---------------------------------------------------
 
 .App{
@@ -122,15 +128,6 @@ a{
     height: 100%;
 
     overflow-y: scroll;
-}
-
-.feed{
-    width: 100%;
-}
-
-.posts-container{
-    width: fit-content;
-    margin: auto;
 }
 
 footer{

@@ -10,9 +10,10 @@ export default function Drawing(props) {
     nav('/Home');
   }
 
-  return (
-        <div className='canvas-container'>
-          <DrawingCanvas onCompletion={toHome} />
-        </div>
+  return (   
+      <div className='canvas-container'>
+        <h1>Drawing</h1>
+        <DrawingCanvas onCompletion={toHome} />
+      </div>
   )
 }

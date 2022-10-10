@@ -51,6 +51,7 @@ export default function Header(props) {
   useEffect(() => {
     if(auth.currentUser){
       setRenderHeader(true);
+      console.log(auth)
      }else{
       setRenderHeader(false);
       nav('/');
@@ -60,8 +61,8 @@ export default function Header(props) {
   return (
     <>
       {renderHeader &&
-        <header className='page-cap' >
-          <RoundButton img={props.profilePic} />
+        <header className='page-cap'>
+          <RoundButton img={auth?.currentUser?.photoURL} onClick={() => {nav('/Edit')}} />
           <h1>Pen Post</h1>
           {openMenu &&
             <ul className='main-menu'>
