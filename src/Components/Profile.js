@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase-config';
 import { mapPosts } from '../Functions/Common'
 import { getHistory } from '../Functions/API';
+import { useSearchParams } from 'react-router-dom';
 
 
 export default function History(props) {
 
   const [posts, setPosts] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if(auth.currentUser && posts.length === 0){
-      getHistory(setPosts, auth.currentUser.email); //<- make this email change depending on what profile you want to see, i.e. you clicked someone elses profile. Look into query params
+      getHistory(setPosts, searchParams.get('user')); //<- make this email change depending on what profile you want to see, i.e. you clicked someone elses profile. Look into query params
      }
   }, [auth.currentUser]);
 

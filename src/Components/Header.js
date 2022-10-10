@@ -3,13 +3,14 @@ import RoundButton from './RoundButton';
 import MenuIcon from '../Images/Common/MenuIcon.svg';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
 
   const [renderHeader, setRenderHeader] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const nav = useNavigate();
+  const params = {user: `${auth?.currentUser?.email}`}
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
@@ -31,7 +32,10 @@ export default function Header(props) {
   }
 
   const toProfile = () => {
-    nav('/Profile');
+    nav({
+      pathname: '/Profile',
+      search: `?${createSearchParams(params)}`
+    });
     toggleMenu();
   }
 

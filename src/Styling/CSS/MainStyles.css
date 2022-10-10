@@ -94,6 +94,7 @@
   margin: 8px;
   width: fit-content;
   background-color: gainsboro;
+  border-bottom: 8px solid #6f36da;
 }
 
 .post-content {
@@ -260,8 +261,8 @@ button {
 
 .history {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*
