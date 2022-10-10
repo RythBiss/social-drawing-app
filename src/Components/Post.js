@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GoldStar from '../Images/Common/GoldStar.svg'
 import RoundButton from './RoundButton'
 import { auth, database } from '../firebase-config'
@@ -65,7 +65,7 @@ export default function Post(props) {
     <div className='post'>
         <div className='post-info' >
             <div className='author-info'>
-                <RoundButton img='https://preview.redd.it/pcmfkxdynoj41.jpg?width=640&crop=smart&auto=webp&s=11a2d69c2c187c961c9743360c35073c26e926c3' onClick={handleProfileClick} />
+                <RoundButton img={props.user_photo} onClick={handleProfileClick} />
                 <h3>{props.author}<br/>{props.prompt}</h3>
             </div>
             <button className='stars' onClick={handleStarClick}>

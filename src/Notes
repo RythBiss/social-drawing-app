@@ -15,4 +15,6 @@ Bugs:
 6 - Refresh sends user back to the landing screen.
 7 - [FIXED] All buttons render on top layer.
 8 - [FIXED] Stars don't update visually until next API pull.
-9 - Clicking the top left profile button toggles the menu.
+9 - [FIXED] Clicking the top left profile button toggles the menu.
+10 - [FIXED] Posts need to save the users uid instead of email. Other data should be read using this uid.
+11 - When clicking on another user's profile, the profile page shows current user's icon instead of clicked user's icon.

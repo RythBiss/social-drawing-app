@@ -23,7 +23,7 @@ export default function History(props) {
       <h1>Profile</h1>
       <div className='profile-block'>
         <div className='image-frame'>
-          <img className='profile-image' src={props.image} alt='profile image' />
+          <img className='profile-image' src={auth?.currentUser?.photoURL} alt='profile image' />
         </div>
         <h4>
           {`${user}`}

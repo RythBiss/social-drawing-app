@@ -7,6 +7,7 @@ export const mapPosts = (posts) => {
         postId={posts[current].id}
         content={posts[current].image_url}
         author={posts[current].author_id}
+        user_photo={posts[current].profile_img}
         prompt={posts[current].prompt}
         stars={posts[current].star_users ? posts[current].star_users.length : 0 } />
     ))

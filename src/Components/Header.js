@@ -5,12 +5,12 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
-export default function Header(props) {
+export default function Header() {
 
   const [renderHeader, setRenderHeader] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const nav = useNavigate();
-  const params = {user: `${auth?.currentUser?.email}`}
+  const params = {user: `${auth?.currentUser?.displayName}`}
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);

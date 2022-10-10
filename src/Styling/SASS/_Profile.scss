@@ -16,11 +16,13 @@
 
 .profile-image{
     width: 100%;
+    height: 100%;
+    background-color: GlobalVariables.$canvas;
 }
 
 .image-frame{
     height: 90%;
-    aspect-ratio: 1;
+    aspect-ratio: 1/1;
     margin: 16px;
 
     border-radius: 50%;

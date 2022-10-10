@@ -8,9 +8,9 @@ const postsTableRef = collection(database, 'posts');
 const createPost = async(author, url) => {
     await addDoc(postsTableRef,{
         author_id: author,
+        profile_img: auth.currentUser.photoURL,
         image_url: url,
         prompt: 'feature is WIP',
-        stars: 0,
         date_time: serverTimestamp()
     });
 }
@@ -36,12 +36,12 @@ export const postDrawing = async(canvas) => {
     );
 
     canvas.toBlob((blob) => {
-        const author = auth.currentUser.email;
+        const author = auth.currentUser.displayName;
 
         uploadBytes(drawingRefFB, blob).then(() => {
             getDownloadURL(ref(storage, drawingRefFB._location.path_))
-            .then((r) => {
-                createPost(author, r);
+            .then((response) => {
+                createPost(author, response);
             });
         });
     });
@@ -51,7 +51,7 @@ export const handleUpdateProfile = async(name, img) => {
     if(img){
         const uploadRefFB = ref(
             storage,
-            `uploads/image-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
+            `uploads/user-${auth.currentUser.email}-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
         );
 
         uploadBytes(uploadRefFB, img).then(() => {
