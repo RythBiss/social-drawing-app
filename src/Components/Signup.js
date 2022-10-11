@@ -4,10 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { handleUpdateProfile } from '../Functions/API';
 
-export default function Signup(props) {
-
-    //these will not be stored in plain text, develop a more secure solution when backend is up.
-    //firebase handles encryption. Just make the API call with the data and don't save it anywhere.
+export default function Signup() {
 
     const [nameValue, setNameValue] = useState('');
     const [userValue, setUserValue] = useState('');

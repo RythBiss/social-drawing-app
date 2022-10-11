@@ -59,6 +59,7 @@ useEffect(() => {
       });
 
     return () => unsubscribe();
+    // eslint-disable-next-line
 }, []);
 
   return (

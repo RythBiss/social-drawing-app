@@ -12,6 +12,10 @@
     height: 256px;
     @extend %purple-content;
     margin-top: 30px;
+
+    > button{
+        margin: 8px;
+    }
 }
 
 .profile-image{

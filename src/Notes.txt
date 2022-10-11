@@ -19,3 +19,4 @@ Bugs:
 9 - [FIXED] Clicking the top left profile button toggles the menu.
 10 - [FIXED] Posts need to save the users uid instead of email. Other data should be read using this uid.
 11 - [FIXED] When clicking on another user's profile, the profile page shows current user's icon instead of clicked user's icon.
+12 - Clicking profile while viewing another profile does not load users profile.

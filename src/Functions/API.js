@@ -8,6 +8,7 @@ const postsTableRef = collection(database, 'posts');
 const createPost = async(author, url) => {
     await addDoc(postsTableRef,{
         author_id: author,
+        author_uid: auth.currentUser.uid,
         profile_img: auth.currentUser.photoURL,
         image_url: url,
         prompt: 'feature is WIP',
@@ -32,7 +33,7 @@ export const getHistory = async(setPosts, user) => {
 export const postDrawing = async(canvas) => {
     const drawingRefFB = ref(
         storage,
-        `drawings/canvas-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
+        `drawings/${auth.currentUser.uid}/canvas-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
     );
 
     canvas.toBlob((blob) => {
@@ -51,7 +52,7 @@ export const handleUpdateProfile = async(name, img) => {
     if(img){
         const uploadRefFB = ref(
             storage,
-            `uploads/user-${auth.currentUser.email}-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
+            `uploads/${auth.currentUser.uid}/upload-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
         );
 
         uploadBytes(uploadRefFB, img).then(() => {

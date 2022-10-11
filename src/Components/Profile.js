@@ -30,6 +30,10 @@ export default function History() {
         <h4>
           {`${user}`}
         </h4>
+        {
+          user !== auth.currentUser.displayName &&
+          <button>Follow</button>
+        }
       </div>
       <div className='history'>
         {mapPosts(posts)}

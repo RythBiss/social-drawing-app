@@ -5,9 +5,6 @@ import { auth } from '../firebase-config';
 
 export default function Signin() {
 
-    //these will not be stored in plain text, develop a more secure solution when backend is up.
-    //firebase handles encryption. Just make the API call with the data and don't save it anywhere.
-
     const [userValue, setUserValue] = useState('');
     const [passValue, setPassValue] =useState('');
 
