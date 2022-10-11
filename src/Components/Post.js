@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import GoldStar from '../Images/Common/GoldStar.svg'
 import RoundButton from './RoundButton'
 import { auth, database } from '../firebase-config'
@@ -9,7 +9,10 @@ export default function Post(props) {
 
     const [stars, setStars] = useState(props.stars);
     const postRef = doc(database, 'posts', props.postId);
-    const params = {user: `${props.author}`}
+    const params = {
+        user: props.author,
+        photo: props.user_photo
+    }
     const nav = useNavigate();
 
     const getStars = async() => {
@@ -24,7 +27,6 @@ export default function Post(props) {
         await updateDoc(postRef, {
             star_users: arrayUnion(auth.currentUser.uid)
         }).then(() => {
-            console.log('add')
             getStars();
         });
     }
@@ -33,7 +35,6 @@ export default function Post(props) {
         await updateDoc(postRef, {
             star_users: arrayRemove(auth.currentUser.uid)
         }).then(() => {
-            console.log('revoke')
             getStars();
         });
     }
@@ -42,14 +43,13 @@ export default function Post(props) {
         const postData = await getDoc(postRef);
         
         if(postData.data().star_users){
-            const searchUid = postData.data().star_users.find(element => element == auth.currentUser.uid);
+            const searchUid = postData.data().star_users.find(element => element === auth.currentUser.uid);
             if(searchUid === auth.currentUser.uid){
                 revokeStar();
             }else{
                 addStar();
             }
         }else{
-            console.log('not found');
             addStar();
         }
     }

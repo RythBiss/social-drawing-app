@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
@@ -27,9 +27,6 @@ export default function Signup(props) {
 
     const submitCredentials = async(event) => {
         event.preventDefault();
-
-        console.log('Submited');
-
         try{
             if(passValue === confirmValue) {
                 await createUserWithEmailAndPassword(auth, userValue, passValue)
@@ -48,10 +45,6 @@ export default function Signup(props) {
         setPassValue('');
         setConfirmValue('');
     }
-
-    useEffect(() => {
-        console.log(`${userValue} / ${passValue} / ${confirmValue}`);
-    }, [userValue, passValue, confirmValue]);
 
     return (
         <div className='auth-component'>

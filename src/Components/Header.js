@@ -48,15 +48,18 @@ export default function Header() {
     });
   }
 
-  useEffect(() => {
-    if(auth.currentUser){
-      setRenderHeader(true);
-      console.log(auth)
-     }else{
-      setRenderHeader(false);
-      nav('/');
-     }
-  }, [auth.currentUser]);
+useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    if(user?.auth?._isInitialized){
+          setRenderHeader(true);
+        }else{
+          setRenderHeader(false);
+          nav('/');
+        }
+      });
+
+    return () => unsubscribe();
+}, []);
 
   return (
     <>

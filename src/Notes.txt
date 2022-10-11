@@ -4,17 +4,18 @@ Big Tasks:
 3 - [DONE] Star functionality: click to give post a star, click again to revoke star.
 4 - [DONE] On sign up, allow users to create a user name using 'auth.currentUser.displayName'. Also let users update their profile image using the same method.
     https://skaaptjop.medium.com/understanding-firebase-auth-profiles-f162605a1aed
+5 - Security rules.
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.
 2 - Undo sometimes causes stroke to appear different. Hard to replicate.
 3 - [FIXED] Can't see stars on smaller resolutions.
-3a - Text is cut off. Consider adding display names instead of using emails.
+3a -[FIXED] Text is cut off. Consider adding display names instead of using emails.
 4 - [FIXED] Posts are loaded oldest to newest, should be reverse.
 5 - [FIXED] Signout freezes the app.
-6 - Refresh sends user back to the landing screen.
+6 - [FIXED] Refresh sends user back to the landing screen.
 7 - [FIXED] All buttons render on top layer.
 8 - [FIXED] Stars don't update visually until next API pull.
 9 - [FIXED] Clicking the top left profile button toggles the menu.
 10 - [FIXED] Posts need to save the users uid instead of email. Other data should be read using this uid.
-11 - When clicking on another user's profile, the profile page shows current user's icon instead of clicked user's icon.
+11 - [FIXED] When clicking on another user's profile, the profile page shows current user's icon instead of clicked user's icon.

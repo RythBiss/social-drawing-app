@@ -22,7 +22,6 @@ export default function Signin() {
 
     const submitCredentials = async(event) => {
         event.preventDefault();
-
         try{
             await signInWithEmailAndPassword(auth, userValue, passValue);
             toHome();
