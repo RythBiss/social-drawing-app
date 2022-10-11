@@ -143,9 +143,9 @@ export default function DrawingCanvas(props) {
         setEraserOn(!eraserOn);
     }
 
-    const submit = () => {
-        postDrawing(canvasRef.current);
-        props.onCompletion();
+    const submit = async() => {
+        await postDrawing(canvasRef.current)
+        .then(props.onCompletion());
     }
 
     //update effects

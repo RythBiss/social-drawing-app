@@ -60,6 +60,10 @@ button:active{
     align-items: center;
 
     @extend %even-shadow;
+
+    > img{
+        height: 200%;
+    }
 }
 
 .white{
@@ -128,21 +132,6 @@ h1{
     height: 100%;
 
     overflow-y: scroll;
-}
-
-footer{
-    height: 256px;
-    width: 100%;
-
-    margin-top: 256px;
-
-    background-color: GlobalVariables.$primary-color;
-    color: white;
-    font-size: 2rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 //---------------------------------------------------

@@ -17,9 +17,6 @@ export default function Home() {
       <div className='posts-container'>
         {mapPosts(posts)}
       </div>
-      <footer>
-        Pen Post
-      </footer>
     </div>
   )
 }

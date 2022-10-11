@@ -23,20 +23,22 @@ export default function History() {
   return (
     <div className='profile-container'>
       <h1>Profile</h1>
-      <div className='profile-block'>
-        <div className='image-frame'>
-          <img className='profile-image' src={URL} alt='profile' />
+      <div className='content-container'>
+        <div className='profile-block'>
+          <div className='image-frame'>
+            <img className='profile-image' src={URL} alt='profile' />
+          </div>
+          <h4>
+            {`${user}`}
+          </h4>
+          {
+            user !== auth?.currentUser?.displayName &&
+            <button>Follow</button>
+          }
         </div>
-        <h4>
-          {`${user}`}
-        </h4>
-        {
-          user !== auth.currentUser.displayName &&
-          <button>Follow</button>
-        }
-      </div>
-      <div className='history'>
-        {mapPosts(posts)}
+        <div className='history'>
+          {mapPosts(posts)}
+        </div>
       </div>
     </div>
   )

@@ -36,7 +36,7 @@ export const postDrawing = async(canvas) => {
         `drawings/${auth.currentUser.uid}/canvas-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
     );
 
-    canvas.toBlob((blob) => {
+    await canvas.toBlob((blob) => {
         const author = auth.currentUser.displayName;
 
         uploadBytes(drawingRefFB, blob).then(() => {

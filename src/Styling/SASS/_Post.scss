@@ -44,10 +44,6 @@
     }
 }
 
-.profile-pic{
-    width: 48px;
-}
-
 .stars{
     $size: 50px;
 
@@ -68,9 +64,12 @@
     }
 
     > div{
-        height: 12px;
-
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
         > h3{
+            margin-top: 5px;
             font-size: 1.4rem;
             
             text-align: center;

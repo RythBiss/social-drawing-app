@@ -67,7 +67,7 @@ useEffect(() => {
       {renderHeader &&
         <header className='page-cap'>
           <RoundButton img={auth?.currentUser?.photoURL} onClick={() => {nav('/Edit')}} />
-          <h1>Pen Post</h1>
+          <h1>Pen Pals</h1>
           {openMenu &&
             <ul className='main-menu'>
               <li onClick={toHome}>Home</li>
