@@ -11,6 +11,7 @@ export default function Post(props) {
     const postRef = doc(database, 'posts', props.postId);
     const params = {
         user: props.author,
+        uid: props.uid,
         photo: props.user_photo
     }
     const nav = useNavigate();

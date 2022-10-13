@@ -1,9 +1,10 @@
 import { auth, storage, database } from '../firebase-config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 
 const postsTableRef = collection(database, 'posts');
+const followTableRef = collection(database, 'follow_lists');
 
 const createPost = async(author, url) => {
     await addDoc(postsTableRef,{
@@ -26,7 +27,7 @@ export const getPosts = async(setPosts) => {
 export const getHistory = async(setPosts, user) => {
     const postQuery = query(postsTableRef, where("author_id", "==", `${user}`), orderBy('date_time', 'desc'));
     const response = await getDocs(postQuery);
-    
+
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
 }
 
@@ -73,5 +74,11 @@ export const handleUpdateProfile = async(name, img) => {
 }
 
 export const handleFollow = async(followUser) => {
-    console.log('Follow function called')
+    const list = await getDocs(query(followTableRef, where('owner', '==', auth.currentUser.uid)));
+
+    const docRef = doc(database, "follow_lists", list.docs[0].id);
+
+    await updateDoc(docRef, {
+        followed: arrayUnion(followUser)
+    })
 }
