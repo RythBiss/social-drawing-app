@@ -71,3 +71,7 @@ export const handleUpdateProfile = async(name, img) => {
         });
     }
 }
+
+export const handleFollow = async(followUser) => {
+    console.log('Follow function called')
+}

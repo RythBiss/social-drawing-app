@@ -2,10 +2,6 @@ import React, { useEffect } from 'react'
 
 export default function RoundButton(props) {
 
-  useEffect(() => {
-    console.log(props.img)
-  })
-
   return (
     <button className={`round-button ${props.color}`} onClick={props.onClick} >
       {

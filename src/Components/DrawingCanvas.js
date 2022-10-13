@@ -47,9 +47,11 @@ export default function DrawingCanvas(props) {
     };
 
     const finishDrawing = () => {
-        contextRef.current.closePath();
-        commitPath();
-        setIsDrawing(false);
+        if(isDrawing){
+            contextRef.current.closePath();
+            commitPath();
+            setIsDrawing(false);
+        }
     };
 
     const draw = ({ nativeEvent }) => {
@@ -224,6 +226,7 @@ export default function DrawingCanvas(props) {
             onTouchEnd={finishDrawing}
             onMouseMove={draw}
             onTouchMove={draw}
+            onMouseLeave={finishDrawing}
             ref={canvasRef}
         />
         <div className='drawing-tools'>

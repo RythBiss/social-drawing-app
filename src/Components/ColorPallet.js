@@ -22,7 +22,7 @@ export default function ColorPallet(props) {
                 <circle cx="25" cy="25" r="25" fill={`${colors[swatch]}`}/>
             </svg>
 
-            return <RoundButton svg={svg} onClick={() => changeColor(colors[swatch])} />
+            return <RoundButton key={swatch.id} svg={svg} onClick={() => changeColor(colors[swatch])} />
         })}
     </>
   )
