@@ -10,8 +10,11 @@ export default function Header() {
   const [renderHeader, setRenderHeader] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const nav = useNavigate();
-  const params = {user: `${auth?.currentUser?.displayName}`}
-
+  const params = {
+    user: auth?.currentUser?.displayName,
+    uid: auth?.currentUser?.uid,
+    photo: auth?.currentUser?.photoURL
+  }
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   }

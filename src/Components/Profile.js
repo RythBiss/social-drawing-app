@@ -33,9 +33,7 @@ export default function History() {
   useEffect(() => {
     const removeAuthListener = auth.onAuthStateChanged((user) => {
       if(user?.auth?._isInitialized){
-        if(posts.length === 0){
-          getHistory(setPosts, searchParams.get('user')); //<- make this email change depending on what profile you want to see, i.e. you clicked someone elses profile. Look into query params
-        }
+          getHistory(setPosts, searchParams.get('user'));
           setUser(searchParams.get('user'));
           setURL(searchParams.get('photo') ? searchParams.get('photo') : auth.currentUser.photoURL);
           setUID(searchParams.get('uid'))
@@ -44,7 +42,11 @@ export default function History() {
   
       return () => removeAuthListener();
       // eslint-disable-next-line
-  }, []);
+  }, [searchParams]);
+
+  useEffect(() => {
+    console.log(searchParams)
+  }, [searchParams]);
 
   return (
     <div className='profile-container'>
