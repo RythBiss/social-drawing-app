@@ -38,6 +38,7 @@ export default function PenSettings(props) {
       default:
         setMenu(<></>)
     }
+    // eslint-disable-next-line
   }, [props.type])
 
   return (

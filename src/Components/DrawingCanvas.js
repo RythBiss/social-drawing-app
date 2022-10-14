@@ -90,7 +90,7 @@ export default function DrawingCanvas(props) {
     //-------------------------------------------------------
 
     const undo = () => {
-        {/*https://stackoverflow.com/questions/53960651/how-to-make-an-undo-function-in-canvas*/}
+        /*https://stackoverflow.com/questions/53960651/how-to-make-an-undo-function-in-canvas*/
 
         if(history.length > 0){
             const canvas = canvasRef.current;
@@ -168,6 +168,7 @@ export default function DrawingCanvas(props) {
         contextRef.current = context;
 
         setFrameSize(canvasRef.current.offsetWidth);
+        // eslint-disable-next-line
     }, []);
 
     //redraw when history changes
@@ -188,6 +189,7 @@ export default function DrawingCanvas(props) {
         contextRef.current.strokeStyle = hex;
         contextRef.current.lineWidth = penWidth;
         eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
+        // eslint-disable-next-line
     }, [history]);
 
     //update canvas stroke color

@@ -49,7 +49,7 @@ export default function Header() {
   }
 
 useEffect(() => {
-  const unsubscribe = auth.onAuthStateChanged((user) => {
+  const removeAuthListener = auth.onAuthStateChanged((user) => {
     if(user?.auth?._isInitialized){
           setRenderHeader(true);
         }else{
@@ -58,7 +58,7 @@ useEffect(() => {
         }
       });
 
-    return () => unsubscribe();
+    return () => removeAuthListener();
     // eslint-disable-next-line
 }, []);
 

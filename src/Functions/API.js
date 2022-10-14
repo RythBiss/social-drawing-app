@@ -1,6 +1,6 @@
 import { auth, storage, database } from '../firebase-config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 
 const postsTableRef = collection(database, 'posts');
@@ -15,6 +15,12 @@ const createPost = async(author, url) => {
         prompt: 'feature is WIP',
         date_time: serverTimestamp()
     });
+}
+
+export const getFollowed = async() => {
+    const followList = await getDocs(query(followTableRef, where('owner', '==', auth.currentUser.uid)));
+
+    return followList;
 }
 
 export const getPosts = async(setPosts) => {
@@ -74,11 +80,35 @@ export const handleUpdateProfile = async(name, img) => {
 }
 
 export const handleFollow = async(followUser) => {
-    const list = await getDocs(query(followTableRef, where('owner', '==', auth.currentUser.uid)));
+    const followList = await getFollowed();
 
-    const docRef = doc(database, "follow_lists", list.docs[0].id);
+    const docRef = doc(database, "follow_lists", followList.docs[0].id);
 
-    await updateDoc(docRef, {
-        followed: arrayUnion(followUser)
+    await isFollowingUser(followUser)
+    .then(async(res) => {
+        if(res){
+            await updateDoc(docRef, {
+                followed: arrayRemove(followUser)
+            })
+        }else{
+            await updateDoc(docRef, {
+                followed: arrayUnion(followUser)
+            })
+        }
     })
+
+    return await isFollowingUser(followUser);
+}
+
+export const isFollowingUser = async(user) => {
+    let response = false
+    
+    await getFollowed()
+    .then(list => 
+        {list.docs[0].data().followed.forEach(uid => {
+            if(uid === user) response = true;
+        })
+    });
+    
+    return response;
 }
