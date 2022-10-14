@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
-import { handleUpdateProfile } from '../Functions/API';
+import { createUserDocs, handleUpdateProfile } from '../Functions/API';
 
 export default function Signup() {
 
@@ -29,6 +29,7 @@ export default function Signup() {
                 await createUserWithEmailAndPassword(auth, userValue, passValue)
                 .then(() => {
                     handleUpdateProfile(nameValue, null);
+                    createUserDocs(auth.currentUser.uid, nameValue);
                     toHome();
                 })
             }else{
@@ -37,7 +38,8 @@ export default function Signup() {
         }catch(e){
             console.log(e.message);
         }
-
+        
+        setNameValue('');
         setUserValue('');
         setPassValue('');
         setConfirmValue('');

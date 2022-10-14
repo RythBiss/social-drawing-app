@@ -1,10 +1,11 @@
 import { auth, storage, database } from '../firebase-config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, updateDoc, arrayUnion, arrayRemove, setDoc, getDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 
 const postsTableRef = collection(database, 'posts');
 const followTableRef = collection(database, 'follow_lists');
+const userTableRef = collection(database, 'user_data');
 
 const createPost = async(author, url) => {
     await addDoc(postsTableRef,{
@@ -56,27 +57,33 @@ export const postDrawing = async(canvas) => {
 }
 
 export const handleUpdateProfile = async(name, img) => {
-    if(img){
-        const uploadRefFB = ref(
-            storage,
-            `uploads/${auth.currentUser.uid}/upload-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
-        );
-
-        uploadBytes(uploadRefFB, img).then(() => {
-            getDownloadURL(ref(storage, uploadRefFB._location.path_))
-            .then((url) => {
-                updateProfile(auth.currentUser, {
-                    photoURL: url
-                })
+    const update = async () => {
+        if(img){
+            const uploadRefFB = ref(
+                storage,
+                `uploads/${auth.currentUser.uid}/upload-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
+            );
+    
+            uploadBytes(uploadRefFB, img).then(() => {
+                getDownloadURL(ref(storage, uploadRefFB._location.path_))
+                .then((url) => {
+                    updateProfile(auth.currentUser, {
+                        photoURL: url
+                    })
+                    .then(async() => await setUserDoc())
+                });
             });
-        });
+        }
+    
+        if(name){
+            updateProfile(auth.currentUser, {
+                displayName: name
+            })
+            .then(async() => await setUserDoc())
+        }
     }
 
-    if(name){
-        updateProfile(auth.currentUser, {
-            displayName: name
-        });
-    }
+    await update();
 }
 
 export const handleFollow = async(followUser) => {
@@ -105,10 +112,38 @@ export const isFollowingUser = async(user) => {
     
     await getFollowed()
     .then(list => 
-        {list.docs[0].data().followed.forEach(uid => {
-            if(uid === user) response = true;
-        })
-    });
+        {
+            if(list.docs[0].data().followed){
+                list.docs[0].data().followed.forEach(uid => {
+                    if(uid === user) response = true;
+                })
+            }
+        }
+    );
     
     return response;
+}
+
+export const createUserDocs = async() => {
+    await setUserDoc();
+
+    await setDoc(doc(followTableRef, auth.currentUser.uid), {
+        owner: auth.currentUser.uid
+    })
+}
+
+const setUserDoc = async() => {
+    await setDoc(doc(userTableRef, auth.currentUser.uid), {
+        userID: auth.currentUser.uid,
+        displayName: auth.currentUser.displayName,
+        photoURL: auth.currentUser.photoURL
+    })
+}
+
+export const getUserData = async(uid) => {
+    const userDoc = doc(userTableRef, uid);
+    const userDocRef = await getDoc(userDoc);
+    const userData = userDocRef.data();
+    
+    return userData;
 }

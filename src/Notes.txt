@@ -5,6 +5,7 @@ Big Tasks:
 4 - [DONE] On sign up, allow users to create a user name using 'auth.currentUser.displayName'. Also let users update their profile image using the same method.
     https://skaaptjop.medium.com/understanding-firebase-auth-profiles-f162605a1aed
 5 - Security rules.
+6 - Make sure all documents are generated when a new account is created.
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.

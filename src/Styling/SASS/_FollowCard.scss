@@ -1,0 +1,13 @@
+@use 'GlobalVariables';
+
+.follow-card{
+    background-color: GlobalVariables.$canvas;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    margin: 16px;
+
+    > h2{
+        margin: 8px;
+    }
+}

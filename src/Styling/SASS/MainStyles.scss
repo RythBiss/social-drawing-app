@@ -10,6 +10,7 @@ sass --watch src/Styling/SASS:src/Styling/CSS
 @use 'Drawing';
 @use 'Profile';
 @use 'Edit';
+@use 'FollowCard';
 
 *{
     margin: 0;

@@ -378,6 +378,17 @@ label:active {
   scale: 0.9;
 }
 
+.follow-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  margin: 16px;
+}
+.follow-card > h2 {
+  margin: 8px;
+}
+
 /*
 sass --watch src/Styling/SASS:src/Styling/CSS
 */
