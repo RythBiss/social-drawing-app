@@ -5,18 +5,18 @@ import RoundButton from './RoundButton'
 export default function FollowingCard(props) {
 
     const params = {
-        user: props.user,
-        uid: props.uid,
-        photo: props.user_photo
+      user: props.user,
+      uid: props.uid,
+      photo: props.user_photo
     }
     const nav = useNavigate();
 
     const handleProfileClick = () => {
-        nav({
-            pathname: '/Profile',
-            search: `?${createSearchParams(params)}`
-            });
-    }
+      nav({
+          pathname: '/Profile',
+          search: `?${createSearchParams(params)}`
+          });
+      }
 
   return (
     <div className='follow-card' onClick={handleProfileClick}>
