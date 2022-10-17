@@ -2,6 +2,7 @@
 
 .home-container{
     @extend %flex-center;
+    flex-direction: column;
     
     width: clamp(175px, 50%, 300px);
 }

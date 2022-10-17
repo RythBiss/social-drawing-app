@@ -96,6 +96,7 @@ button, label {
 }
 
 .home-container {
+  flex-direction: column;
   width: clamp(175px, 50%, 300px);
 }
 
@@ -447,6 +448,10 @@ button:active {
 
 .white:hover {
   background-color: #dddddd;
+}
+
+form {
+  flex-direction: column;
 }
 
 input {

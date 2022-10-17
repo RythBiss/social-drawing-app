@@ -84,6 +84,7 @@ button:active{
 
 form{
     @extend %flex-center;
+    flex-direction: column;
 }
 
 input{
