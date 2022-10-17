@@ -1,13 +1,21 @@
 @use 'GlobalVariables';
 
+.following{
+    width: 100%;
+    overflow-y: scroll;
+    padding-bottom: 64px
+}
+
 .follow-card{
-    background-color: GlobalVariables.$canvas;
-    display: flex;
+    @extend %purple-content;
     align-items: center;
-    border-radius: 4px;
-    margin: 16px;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 80%;
+    margin: 8px auto;
 
     > h2{
         margin: 8px;
+        color: GlobalVariables.$text-color-2;
     }
 }

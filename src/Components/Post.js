@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import GoldStar from '../Images/Common/GoldStar.svg'
+import React, { useEffect, useState } from 'react'
+import GoldStar from '../Images/Common/GoldStar.png'
+import BlankStar from '../Images/Common/StarOutline.png'
 import RoundButton from './RoundButton'
 import { auth, database } from '../firebase-config'
 import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
@@ -15,6 +16,7 @@ export default function Post(props) {
         photo: props.user_photo
     }
     const nav = useNavigate();
+    const [userStarred, setUserStarred] = useState(false);
 
     const getStars = async() => {
         const postData = await getDoc(postRef);
@@ -62,15 +64,27 @@ export default function Post(props) {
           });
     }
 
+    useEffect(() => {
+        const checkStarStatus = async() =>{
+            const postData = await getDoc(postRef);
+            const searchUid = postData.data().star_users.find(element => element === auth.currentUser.uid);
+
+            setUserStarred(searchUid === undefined ? false : true);
+        };
+
+        checkStarStatus();
+        // eslint-disable-next-line
+    }, [stars])
+
   return (
     <div className='post'>
         <div className='post-info' >
             <div className='author-info'>
                 <RoundButton img={props.user_photo} onClick={handleProfileClick} />
-                <h3>{props.author}<br/>{props.prompt}</h3>
+                <h3>{props.author}</h3>
             </div>
             <button className='stars' onClick={handleStarClick}>
-                <img className='star-part' src={GoldStar} alt='star'/>
+                <img className='star-part' src={userStarred ? GoldStar : BlankStar} alt='star'/>
                 <div className='star-part'>
                     <h3>{stars}</h3>
                 </div>

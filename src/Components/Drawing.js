@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DrawingCanvas from './DrawingCanvas';
 
 
-export default function Drawing(props) {
+export default function Drawing() {
 
   const nav = useNavigate();
 
@@ -12,7 +13,6 @@ export default function Drawing(props) {
 
   return (   
       <div className='canvas-container'>
-        <h1>Drawing</h1>
         <DrawingCanvas onCompletion={toHome} />
       </div>
   )

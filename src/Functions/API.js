@@ -13,7 +13,6 @@ const createPost = async(author, url) => {
         author_uid: auth.currentUser.uid,
         profile_img: auth.currentUser.photoURL,
         image_url: url,
-        prompt: 'feature is WIP',
         date_time: serverTimestamp()
     });
 }

@@ -20,6 +20,13 @@ sass --watch src/Styling/SASS:src/Styling/CSS
     color: GlobalVariables.$text-color;
 }
 
+body{
+    width: 100%;
+    overscroll-behavior: contain;
+    position: fixed;
+    -webkit-overflow-scrolling: touch;
+}
+
 //---------------------------------------------------
 
 button{
@@ -36,7 +43,7 @@ button{
 }
 
 button:hover{
-    background-color: GlobalVariables.$hover-color;
+    background-color: GlobalVariables.$hover-color-2;
     color: GlobalVariables.$bg-color;
 }
 
@@ -56,9 +63,7 @@ button:active{
 
     margin: 8px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %flex-center;
 
     @extend %even-shadow;
 
@@ -78,9 +83,7 @@ button:active{
 //---------------------------------------------------
 
 form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @extend %flex-center;
 }
 
 input{
@@ -123,7 +126,6 @@ h1{
     height: 100vh;
 
     background-color: GlobalVariables.$bg-color;
-    overflow-y: hidden;
 }
 
 .page{
@@ -131,8 +133,6 @@ h1{
     justify-content: center;
 
     height: 100%;
-
-    overflow-y: scroll;
 }
 
 //---------------------------------------------------

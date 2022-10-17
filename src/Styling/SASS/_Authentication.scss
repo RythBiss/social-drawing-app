@@ -1,10 +1,8 @@
 @use 'GlobalVariables';
 
 .auth-component{
-    display: flex;
+    @extend %flex-center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     
     width: 100%;
 

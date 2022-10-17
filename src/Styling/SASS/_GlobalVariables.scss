@@ -24,12 +24,16 @@ $canvas: rgba(255, 255, 255, 0.9);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     background-color: $active-color;
 
-    display: flex;
+    @extend %flex-center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 %button-font{
     font-size: 0.8rem;
+}
+
+%flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

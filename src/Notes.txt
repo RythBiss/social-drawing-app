@@ -11,7 +11,7 @@ Big Tasks:
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.
-2 - Undo sometimes causes stroke to appear different. Hard to replicate.
+2 - [?FIXED?] Undo sometimes causes stroke to appear different. Hard to replicate.
 3 - [FIXED] Can't see stars on smaller resolutions.
 3a -[FIXED] Text is cut off. Consider adding display names instead of using emails.
 4 - [FIXED] Posts are loaded oldest to newest, should be reverse.
@@ -22,15 +22,15 @@ Bugs:
 9 - [FIXED] Clicking the top left profile button toggles the menu.
 10 - [FIXED] Posts need to save the users uid instead of email. Other data should be read using this uid.
 11 - [FIXED] When clicking on another user's profile, the profile page shows current user's icon instead of clicked user's icon.
-12 - Clicking profile while viewing another profile does not load users profile.
+12 - [FIXED] Clicking profile while viewing another profile does not load users profile.
 13 - Add some input verifications to sign in, sign up, change name, and upload profile image
 14 - Eraser needs a visual indicator that it is toggled on.
 15 - Login / Signin needs indicators for errors.
 16 - Submitting a drawing doesn't show it on home, needs to be refreshed to see new post.
-17 - Anythin that says 'loading' when there is nothing to show needs to be changed to show 'nothing to show' or something similar.
+17 - Anything that says 'loading' when there is nothing to show needs to be changed to show 'nothing to show' or something similar.
 18 - Top left icon doesn't change when updated.
 19 - Clicking anywhere on a post should take you to the profile it is from.
-20 - Add place holder images for accounts with no profile pic.
+20 - [FIXED] Add place holder images for accounts with no profile pic.
 21 - Header needs to have text centered better.
 
 Carrie's Bugs:

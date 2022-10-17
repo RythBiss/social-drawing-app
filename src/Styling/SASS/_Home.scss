@@ -1,8 +1,7 @@
+@use 'GlobalVariables';
+
 .home-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @extend %flex-center;
     
     width: clamp(175px, 50%, 300px);
 }
@@ -13,21 +12,37 @@
     justify-content: center;
 
     width: 100%;
-
-    > button{
-        margin: 8px;
-    }
 }
 
 .feed{
     width: 100%;
+    overflow-y: scroll;
+    padding-bottom: 30px;
 }
 
 .posts-container{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-top: 30px;
+    width: fit-content;
     padding-bottom: 30px;
     align-items: center;
+    margin: auto
+}
+
+.home-nav{
+    @extend %purple-content;
+    margin: 16px 8px;
+    font-size: 1rem;
+    max-width: none;
+}
+
+.home-nav:hover{
+    background-color: GlobalVariables.$hover-color;
+}
+
+.home-buttons{
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
 }

@@ -35,8 +35,7 @@
     }
 
     > .author-info{
-        display: flex;
-        align-items: center;
+        @extend %flex-center;
 
         > .round-button{
             border: 1px solid white;
@@ -48,9 +47,7 @@
     $size: 50px;
 
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %flex-center;
 
     width: $size;
     height: $size;
@@ -64,9 +61,7 @@
     }
 
     > div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @extend %flex-center;
         height: 100%;
         > h3{
             margin-top: 5px;
@@ -76,9 +71,13 @@
 
             text-shadow: 1px 1px rgba(0, 0, 0, 0.25);
 
-            color: GlobalVariables.$bg-color;
+            color: GlobalVariables.$text-color;
         }
     }
+}
+
+.stars:hover{
+    background-color: rgba(0, 0, 0, 0);
 }
 
 @media (max-width: 576px), (max-height: 576px) {

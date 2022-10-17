@@ -8,7 +8,6 @@ export default function Edit() {
 
   return (
     <div className='edit-container'>
-        <h1>Account Settings</h1>
         <div className='edit-name'>
             <h1>Change Display Name</h1>
             <div>

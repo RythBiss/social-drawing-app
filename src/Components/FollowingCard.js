@@ -21,7 +21,7 @@ export default function FollowingCard(props) {
   return (
     <div className='follow-card' onClick={handleProfileClick}>
         <RoundButton img={props.user_photo} />
-        <h2>User: {props.user}</h2>
+        <h2>{props.user}</h2>
     </div>
   )
 }

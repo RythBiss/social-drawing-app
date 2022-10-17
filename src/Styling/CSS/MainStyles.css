@@ -6,28 +6,28 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 }
 
-.edit-pic, .edit-name, .profile-block {
+.follow-card, .edit-pic, .edit-name, .profile-block, .home-nav {
   margin: 16px 0;
   padding: 8px;
   border-radius: 4px;
   border-bottom: 8px solid #6f36da;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   background-color: #4e3a86;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 button, label {
   font-size: 0.8rem;
 }
 
-.auth-component {
+.round-button, form, .edit-container, .edit-pic > div, .edit-name > div, .history, .drawing-tools, .pen-color, .pen-size, .post-info > .author-info, .stars, .stars > div, .home-container, .auth-component, .follow-card, .edit-pic, .edit-name, .profile-block, .home-nav {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.auth-component {
+  flex-direction: column;
   width: 100%;
 }
 .auth-component > h1 {
@@ -56,6 +56,8 @@ button, label {
   background-color: #6f36da;
 }
 .page-cap > h1 {
+  margin: auto;
+  font-size: 2.75rem;
   color: #f0f0f0;
 }
 .page-cap > button {
@@ -94,10 +96,6 @@ button, label {
 }
 
 .home-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: clamp(175px, 50%, 300px);
 }
 
@@ -107,21 +105,36 @@ button, label {
   justify-content: center;
   width: 100%;
 }
-.home-buttons-container > button {
-  margin: 8px;
-}
 
 .feed {
   width: 100%;
+  overflow-y: scroll;
+  padding-bottom: 30px;
 }
 
 .posts-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin-top: 30px;
+  width: fit-content;
   padding-bottom: 30px;
   align-items: center;
+  margin: auto;
+}
+
+.home-nav {
+  margin: 16px 8px;
+  font-size: 1rem;
+  max-width: none;
+}
+
+.home-nav:hover {
+  background-color: #965ffa;
+}
+
+.home-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .post {
@@ -151,19 +164,12 @@ button, label {
   text-align: left;
   overflow: hidden;
 }
-.post-info > .author-info {
-  display: flex;
-  align-items: center;
-}
 .post-info > .author-info > .round-button {
   border: 1px solid white;
 }
 
 .stars {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 50px;
   height: 50px;
   margin: 8px;
@@ -174,9 +180,6 @@ button, label {
   width: 100%;
 }
 .stars > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 }
 .stars > div > h3 {
@@ -184,7 +187,11 @@ button, label {
   font-size: 1.4rem;
   text-align: center;
   text-shadow: 1px 1px rgba(0, 0, 0, 0.25);
-  color: #383438;
+  color: #9E9E9E;
+}
+
+.stars:hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 @media (max-width: 576px), (max-height: 576px) {
@@ -220,7 +227,8 @@ button, label {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 8px auto auto auto;
 }
 .button-row > button img {
   height: 100%;
@@ -231,17 +239,13 @@ button {
 }
 
 .drawing-tools {
-  display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 }
 
 .pen-color {
   position: absolute;
   top: -430%;
-  display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   border: 1px solid #9E9E9E;
   border-radius: 8px;
@@ -253,8 +257,6 @@ button {
   position: absolute;
   top: -155%;
   padding: 8px;
-  display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   border: 1px solid #9E9E9E;
   border-radius: 8px;
@@ -280,6 +282,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 }
 
 .content-container {
@@ -308,9 +311,8 @@ button {
 }
 
 .history {
-  display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-bottom: 64px;
 }
 
 @media (max-width: 1024px) {
@@ -320,18 +322,13 @@ button {
   }
 }
 .edit-name > div, .edit-pic > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 8px;
 }
 
 .edit-container {
   width: 75%;
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 }
 
 .edit-pic {
@@ -378,15 +375,22 @@ label:active {
   scale: 0.9;
 }
 
+.following {
+  width: 100%;
+  overflow-y: scroll;
+  padding-bottom: 64px;
+}
+
 .follow-card {
-  background-color: rgba(255, 255, 255, 0.9);
-  display: flex;
   align-items: center;
-  border-radius: 4px;
-  margin: 16px;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 80%;
+  margin: 8px auto;
 }
 .follow-card > h2 {
   margin: 8px;
+  color: #f0f0f0;
 }
 
 /*
@@ -400,6 +404,13 @@ sass --watch src/Styling/SASS:src/Styling/CSS
   color: #9E9E9E;
 }
 
+body {
+  width: 100%;
+  overscroll-behavior: contain;
+  position: fixed;
+  -webkit-overflow-scrolling: touch;
+}
+
 button {
   border: none;
   border-radius: 1rem;
@@ -410,7 +421,7 @@ button {
 }
 
 button:hover {
-  background-color: #965ffa;
+  background-color: #dddddd;
   color: #383438;
 }
 
@@ -425,9 +436,6 @@ button:active {
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.9);
   margin: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .round-button > img {
   height: 200%;
@@ -439,12 +447,6 @@ button:active {
 
 .white:hover {
   background-color: #dddddd;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 input {
@@ -477,14 +479,12 @@ h1 {
   justify-content: space-between;
   height: 100vh;
   background-color: #383438;
-  overflow-y: hidden;
 }
 
 .page {
   display: flex;
   justify-content: center;
   height: 100%;
-  overflow-y: scroll;
 }
 
 @media only screen and (min-width: 600px) {

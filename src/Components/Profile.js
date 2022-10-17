@@ -3,6 +3,8 @@ import { auth } from '../firebase-config';
 import { mapPosts } from '../Functions/Common'
 import { getHistory, handleFollow, isFollowingUser } from '../Functions/API';
 import { useSearchParams } from 'react-router-dom';
+import DefaultProfile from '../Images/Common/DefaultProfile.png'
+
 
 
 export default function History() {
@@ -35,7 +37,7 @@ export default function History() {
       if(user?.auth?._isInitialized){
           getHistory(setPosts, searchParams.get('user'));
           setUser(searchParams.get('user'));
-          setURL(searchParams.get('photo') ? searchParams.get('photo') : auth.currentUser.photoURL);
+          setURL(searchParams.get('photo'));
           setUID(searchParams.get('uid'))
         }
         });
@@ -44,24 +46,19 @@ export default function History() {
       // eslint-disable-next-line
   }, [searchParams]);
 
-  useEffect(() => {
-    console.log(searchParams)
-  }, [searchParams]);
-
   return (
     <div className='profile-container'>
-      <h1>Profile</h1>
       <div className='content-container'>
         <div className='profile-block'>
           <div className='image-frame'>
-            <img className='profile-image' src={URL} alt='profile' />
+            <img className='profile-image' src={URL !== 'null' ? URL : DefaultProfile /*searchParams returns 'null' instead of a null value for some reason*/} alt='profile' />
           </div>
           <h4>
             {`${user}`}
           </h4>
           {
             user !== auth?.currentUser?.displayName &&
-            <button onClick={clickFollow} >{isFollowing ? 'Following' : 'Follow'}</button>
+            <button onClick={clickFollow}>{isFollowing ? 'Following' : 'Follow'}</button>
           }
         </div>
         <div className='history'>
