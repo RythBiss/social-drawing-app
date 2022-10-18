@@ -20,6 +20,10 @@ sass --watch src/Styling/SASS:src/Styling/CSS
     color: GlobalVariables.$text-color;
 }
 
+html, body{
+    height: 100%;
+}
+
 body{
     width: 100%;
     overscroll-behavior: contain;
@@ -43,7 +47,7 @@ button{
 }
 
 button:hover{
-    background-color: GlobalVariables.$hover-color-2;
+    background-color: GlobalVariables.$hover-color;
     color: GlobalVariables.$bg-color;
 }
 
@@ -127,6 +131,7 @@ h1{
     height: 100vh;
 
     background-color: GlobalVariables.$bg-color;
+    padding-bottom: 64px;
 }
 
 .page{

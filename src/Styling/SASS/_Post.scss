@@ -17,6 +17,8 @@
 
 .post-content{
     width: auto;
+    min-width: 500px;
+    min-height: 500px;
     background-color: GlobalVariables.$canvas;
 }
 
@@ -83,6 +85,8 @@
 @media (max-width: 576px), (max-height: 576px) {
     .post-content{
         width: 300px;
+        min-width: 300px;
+        min-height: 300px;
     }
 
     .post-info{

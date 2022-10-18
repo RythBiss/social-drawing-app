@@ -20,7 +20,7 @@ button, label {
   font-size: 0.8rem;
 }
 
-.round-button, form, .edit-container, .edit-pic > div, .edit-name > div, .history, .drawing-tools, .pen-color, .pen-size, .post-info > .author-info, .stars, .stars > div, .home-container, .auth-component, .follow-card, .edit-pic, .edit-name, .profile-block, .home-nav {
+.round-button, form, .edit-container, .edit-pic > div, .edit-name > div, .history, .button-row, .drawing-tools, .pen-color, .pen-size, .post-info > .author-info, .stars, .stars > div, .home-container, .auth-component, .follow-card, .edit-pic, .edit-name, .profile-block, .home-nav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,6 +106,9 @@ button, label {
   justify-content: center;
   width: 100%;
 }
+.home-buttons-container > button {
+  margin: 4px;
+}
 
 .feed {
   width: 100%;
@@ -116,7 +119,7 @@ button, label {
 .posts-container {
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 516px;
   padding-bottom: 30px;
   align-items: center;
   margin: auto;
@@ -138,6 +141,16 @@ button, label {
   justify-content: space-between;
 }
 
+@media (max-width: 576px), (max-height: 576px) {
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    width: 316px;
+    padding-bottom: 30px;
+    align-items: center;
+    margin: auto;
+  }
+}
 .post {
   display: flex;
   flex-direction: column;
@@ -150,6 +163,8 @@ button, label {
 
 .post-content {
   width: auto;
+  min-width: 500px;
+  min-height: 500px;
   background-color: rgba(255, 255, 255, 0.9);
 }
 
@@ -198,6 +213,8 @@ button, label {
 @media (max-width: 576px), (max-height: 576px) {
   .post-content {
     width: 300px;
+    min-width: 300px;
+    min-height: 300px;
   }
   .post-info h3 {
     max-width: 170px;
@@ -226,9 +243,6 @@ button, label {
 
 .button-row {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   margin: 8px auto auto auto;
 }
 .button-row > button img {
@@ -405,6 +419,10 @@ sass --watch src/Styling/SASS:src/Styling/CSS
   color: #9E9E9E;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   width: 100%;
   overscroll-behavior: contain;
@@ -422,7 +440,7 @@ button {
 }
 
 button:hover {
-  background-color: #dddddd;
+  background-color: #965ffa;
   color: #383438;
 }
 
@@ -484,6 +502,7 @@ h1 {
   justify-content: space-between;
   height: 100vh;
   background-color: #383438;
+  padding-bottom: 64px;
 }
 
 .page {

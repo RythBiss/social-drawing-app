@@ -5,6 +5,7 @@ import RoundButton from './RoundButton'
 import { auth, database } from '../firebase-config'
 import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { createSearchParams, useNavigate } from 'react-router-dom'
+import { motion } from "framer-motion"
 
 export default function Post(props) {
 
@@ -77,20 +78,30 @@ export default function Post(props) {
     }, [stars])
 
   return (
-    <div className='post'>
+    <motion.div className='post' variants={props.variants}>
         <div className='post-info' >
             <div className='author-info'>
                 <RoundButton img={props.user_photo} onClick={handleProfileClick} />
                 <h3>{props.author}</h3>
             </div>
-            <button className='stars' onClick={handleStarClick}>
-                <img className='star-part' src={userStarred ? GoldStar : BlankStar} alt='star'/>
+            <button
+            className='stars'
+            onClick={handleStarClick}
+            >
+                <img className='star-part' src={BlankStar} alt='star'/>
+
+                <motion.img className='star-part' src={GoldStar} alt='star'
+                    initial={'Off'}
+                    animate={userStarred ? 'On' : 'Off'}
+                    variants={{On: { opacity: 1, scale: 1 }, Off: { opacity: 0, scale: 0 }}}
+                    transition={{ duration: 0.15, ease: "linear" }}
+                />
                 <div className='star-part'>
                     <h3>{stars}</h3>
                 </div>
             </button>
         </div>
         <img className='post-content' src={props.content} alt='post' />
-    </div>
+    </motion.div>
   )
 }

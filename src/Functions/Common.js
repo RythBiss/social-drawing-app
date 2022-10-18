@@ -2,18 +2,22 @@ import FollowingCard from "../Components/FollowingCard"
 import Post from "../Components/Post"
 
 export const mapPosts = (posts) => {
-    return posts.length === 0 ? (<h3>Loading...</h3>) : (Object.keys(posts).map( current => 
-        <Post
-            key={posts[current].id}
-            postId={posts[current].id}
-            content={posts[current].image_url}
-            author={posts[current].author_id}
-            uid={posts[current].author_uid}
-            user_photo={posts[current].profile_img}
-            prompt={posts[current].prompt}
-            stars={posts[current].star_users ? posts[current].star_users.length : 0 }
+    const listItem = {
+        hidden: { opacity: 0 },
+        show: { opacity: 1 }
+      };
+
+    return posts.map((item, i) => (
+        <Post key={i} variants={listItem}
+          postId={item.id}
+          content={item.image_url}
+          author={item.author_id}
+          uid={item.author_uid}
+          user_photo={item.profile_img}
+          prompt={item.prompt}
+          stars={item.star_users ? item.star_users.length : 0 }
         />
-    ))
+      ))
 }
 
 export const mapUsers = (users) => {

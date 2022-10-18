@@ -4,7 +4,7 @@ import { mapPosts } from '../Functions/Common'
 import { getHistory, handleFollow, isFollowingUser } from '../Functions/API';
 import { useSearchParams } from 'react-router-dom';
 import DefaultProfile from '../Images/Common/DefaultProfile.png'
-
+import { motion } from "framer-motion"
 
 
 export default function History() {
@@ -46,6 +46,16 @@ export default function History() {
       // eslint-disable-next-line
   }, [searchParams]);
 
+  const postsContainer = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
     <div className='profile-container'>
       <div className='content-container'>
@@ -61,9 +71,11 @@ export default function History() {
             <button onClick={clickFollow}>{isFollowing ? 'Following' : 'Follow'}</button>
           }
         </div>
-        <div className='history'>
-          {mapPosts(posts)}
-        </div>
+        {posts &&
+          <motion.div className='history' variants={postsContainer} initial="hidden" animate="show">
+            {mapPosts(posts)}
+          </motion.div>
+          }
       </div>
     </div>
   )

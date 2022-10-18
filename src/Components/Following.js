@@ -6,7 +6,7 @@ import { mapUsers } from '../Functions/Common';
 export default function Following() {
 
   const [followList, setFollowList] = useState([]);
-  const [userDataList, setUserDataList] = useState([{},{},{},{},{},{},{},{},{},{},{},{}]);
+  const [userDataList, setUserDataList] = useState([]);
 
   useEffect(() => {
     if(followList.length !== 0){

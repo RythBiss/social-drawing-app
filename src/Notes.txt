@@ -8,10 +8,11 @@ Big Tasks:
 6 - [DONE] Make sure all documents are generated when a new account is created.
 7 - Ability to delete posts.
 8 - Add animations, pop up alerts, loading screens, etc. to polish.
+9 - Infinite scrolling.
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.
-2 - [?FIXED?] Undo sometimes causes stroke to appear different. Hard to replicate.
+2 - Undo sometimes causes stroke to appear different. Hard to replicate.
 3 - [FIXED] Can't see stars on smaller resolutions.
 3a -[FIXED] Text is cut off. Consider adding display names instead of using emails.
 4 - [FIXED] Posts are loaded oldest to newest, should be reverse.

@@ -13,6 +13,9 @@
     justify-content: center;
 
     width: 100%;
+    > button{
+        margin: 4px;
+    }
 }
 
 .feed{
@@ -24,7 +27,7 @@
 .posts-container{
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 516px;
     padding-bottom: 30px;
     align-items: center;
     margin: auto
@@ -46,4 +49,15 @@
 
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width: 576px), (max-height: 576px) {
+    .posts-container{
+        display: flex;
+        flex-direction: column;
+        width: 316px;
+        padding-bottom: 30px;
+        align-items: center;
+        margin: auto
+    }
 }
