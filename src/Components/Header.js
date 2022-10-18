@@ -6,9 +6,8 @@ import { auth } from '../firebase-config';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion"
 
-export default function Header() {
+export default function Header(props) {
 
-  const [renderHeader, setRenderHeader] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const nav = useNavigate();
   const params = {
@@ -52,24 +51,15 @@ export default function Header() {
     });
   }
 
-useEffect(() => {
-  const removeAuthListener = auth.onAuthStateChanged((user) => {
-    if(user?.auth?._isInitialized){
-          setRenderHeader(true);
-        }else{
-          setRenderHeader(false);
-          nav('/');
-        }
-      });
-
-    return () => removeAuthListener();
-    // eslint-disable-next-line
-}, []);
-
   return (
     <>
-      {renderHeader &&
-        <header className='page-cap'>
+      {props.init &&
+        <motion.header
+          className='page-cap'
+          initial={{y: '-100%'}}
+          animate={{y: '0%'}}
+          transition={{ duration: 0.5, type: "tween" }}
+        >
           <RoundButton img={auth?.currentUser?.photoURL} onClick={() => {nav('/Edit')}} />
           <h1>Pen Pals</h1>
           <AnimatePresence>
@@ -78,7 +68,7 @@ useEffect(() => {
               initial={{x: '100%'}}
               animate={{x: '-0%'}}
               exit={{x: '100%'}}
-              transition={{ duration: 0.25, type: "tween" }}
+              transition={{ duration: 0.25, type: "tween", delay: 0.2 }}
               className='main-menu'>
                 <li onClick={toHome}>Home</li>
                 <li onClick={toDraw}>Draw</li>
@@ -89,7 +79,7 @@ useEffect(() => {
           }
           </AnimatePresence>
           <RoundButton img={MenuIcon} onClick={toggleMenu}  color='white' />
-        </header>
+        </motion.header>
       }
     </>
   )

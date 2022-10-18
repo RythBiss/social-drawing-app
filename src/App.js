@@ -25,24 +25,35 @@ function App() {
 
   //hides or shows header and footer
   const [profilePic, setProfilePic] = useState('');
+  const [isInit, setIsInit] = useState(false);
 
   useEffect(() => {
-    setProfilePic(auth?.currentUser?.photoURL);
-  });
+    const removeAuthListener = auth.onAuthStateChanged((user) => {
+      setProfilePic(auth?.currentUser?.photoURL);
+      if(user?.auth?._isInitialized){
+            setIsInit(true);
+          }else{
+            setIsInit(false);
+          }
+        });
+  
+      return () => removeAuthListener();
+      // eslint-disable-next-line
+  }, []);
   
   return (
     <Router>
       <div className="App">
-        <Header profilePic={profilePic} />
+        <Header profilePic={profilePic} init={isInit}/>
         <div className='page'>
           <Routes>
             <Route path='/' element={<Landing />} />
             <Route path='/Signin' element={<Signin />} />
             <Route path='/Signup' element={<Signup />} />
-            <Route path='/Home' element={<Home />} />
+            <Route path='/Home' element={<Home init={isInit} />} />
             <Route path='/Draw' element={<Drawing />} />
             <Route path='/Following' element={<Following />} />
-            <Route path='/Profile' element={<Profile image={profilePic} />} />
+            <Route path='/Profile' element={<Profile init={isInit} image={profilePic} />} />
             <Route path='/Edit' element={<Edit />} />
           </Routes>
         </div>

@@ -2,11 +2,13 @@
 
 .page-cap{
     display: flex;
-    position: relative;
+    position: fixed;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
 
-    height: 56px;
+    width: 100%;
+    height: GlobalVariables.$header-height;
 
     padding: 4px;
 

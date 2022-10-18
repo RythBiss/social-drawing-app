@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { mapPosts } from '../Functions/Common';
 
 
-export default function Home() {
+export default function Home(props) {
 
   const [posts, setPosts] = useState();
   const nav = useNavigate();
@@ -35,14 +35,13 @@ export default function Home() {
     getPosts(setPosts);
   }, []);
 
-  const [list, setList] = useState(['one', 'two', 'three', 'four']);
-
   const postsContainer = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1,
+        delayChildren: 0.5
       }
     }
   };
@@ -52,7 +51,8 @@ export default function Home() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.25
       }
     }
   };
@@ -64,18 +64,18 @@ export default function Home() {
 
   return (
     <div className='feed' >
+      {(props.init && posts) &&
         <div className='posts-container'>
           <motion.div className='home-buttons' variants={buttonsContainer} initial="hidden" animate="show">
             <motion.button className='home-nav' onClick={toDraw} variants={buttonContainer}>Create Drawing</motion.button>
             <motion.button className='home-nav' onClick={toProfile} variants={buttonContainer}>Profile</motion.button>
             <motion.button className='home-nav' onClick={toFollowing} variants={buttonContainer}>Following</motion.button>
           </motion.div>
-          {posts &&
           <motion.div variants={postsContainer} initial="hidden" animate="show">
             {mapPosts(posts)}
           </motion.div>
-          }
-      </div>
+        </div>
+      }
     </div>
   )
 }

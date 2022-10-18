@@ -20,15 +20,15 @@ sass --watch src/Styling/SASS:src/Styling/CSS
     color: GlobalVariables.$text-color;
 }
 
-html, body{
+html{
     height: 100%;
 }
 
 body{
     width: 100%;
-    overscroll-behavior: contain;
-    position: fixed;
-    -webkit-overflow-scrolling: touch;
+    // overscroll-behavior: contain;
+    // position: fixed;
+    // -webkit-overflow-scrolling: touch;
 }
 
 //---------------------------------------------------
@@ -118,7 +118,6 @@ a{
 
 h1{
     text-align: center;
-    margin-top: 30px;
 }
 
 //---------------------------------------------------
@@ -128,17 +127,18 @@ h1{
     flex-direction: column;
     justify-content: space-between;
 
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 
     background-color: GlobalVariables.$bg-color;
-    padding-bottom: 64px;
 }
 
 .page{
     display: flex;
     justify-content: center;
+    margin-top: GlobalVariables.$header-height;
 
-    height: 100%;
+    min-height: 80vh;
 }
 
 //---------------------------------------------------
