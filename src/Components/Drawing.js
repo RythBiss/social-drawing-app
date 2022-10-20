@@ -11,8 +11,10 @@ export default function Drawing() {
   }
 
   return (   
+    <div className='drawing-container' >
       <div className='canvas-container'>
         <DrawingCanvas onCompletion={toHome} />
       </div>
+    </div>
   )
 }

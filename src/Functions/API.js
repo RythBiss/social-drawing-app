@@ -63,7 +63,7 @@ export const handleUpdateProfile = async(name, img) => {
                 `uploads/${auth.currentUser.uid}/upload-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
             );
     
-            uploadBytes(uploadRefFB, img).then(() => {
+            uploadBytes(uploadRefFB, img).then(async() => {
                 getDownloadURL(ref(storage, uploadRefFB._location.path_))
                 .then((url) => {
                     updateProfile(auth.currentUser, {

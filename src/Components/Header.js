@@ -60,7 +60,7 @@ export default function Header(props) {
           animate={{y: '0%'}}
           transition={{ duration: 0.5, type: "tween" }}
         >
-          <RoundButton img={auth?.currentUser?.photoURL} onClick={() => {nav('/Edit')}} />
+          <RoundButton img={props.profilePic} onClick={() => {nav('/Edit')}} />
           <h1>Pen Pals</h1>
           <AnimatePresence>
           {openMenu &&

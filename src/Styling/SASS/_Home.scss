@@ -20,22 +20,19 @@
 
 .feed{
     width: 100%;
-    // overflow-y: scroll;
-    padding-bottom: 30px;
 }
 
 .posts-container{
     display: flex;
     flex-direction: column;
     width: 516px;
-    padding-bottom: 30px;
     align-items: center;
-    margin: auto
+    margin: auto;
 }
 
 .home-nav{
     @extend %purple-content;
-    margin: 16px 8px;
+    margin: 0 8px;
     font-size: 1rem;
     max-width: none;
 }
@@ -46,7 +43,7 @@
 
 .home-buttons{
     width: 100%;
-
+    margin-top: 16px;
     display: flex;
     justify-content: space-between;
 }
@@ -56,7 +53,6 @@
         display: flex;
         flex-direction: column;
         width: 316px;
-        padding-bottom: 30px;
         align-items: center;
         margin: auto
     }

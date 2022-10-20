@@ -114,20 +114,18 @@ button, label {
 
 .feed {
   width: 100%;
-  padding-bottom: 30px;
 }
 
 .posts-container {
   display: flex;
   flex-direction: column;
   width: 516px;
-  padding-bottom: 30px;
   align-items: center;
   margin: auto;
 }
 
 .home-nav {
-  margin: 16px 8px;
+  margin: 0 8px;
   font-size: 1rem;
   max-width: none;
 }
@@ -138,6 +136,7 @@ button, label {
 
 .home-buttons {
   width: 100%;
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
 }
@@ -147,7 +146,6 @@ button, label {
     display: flex;
     flex-direction: column;
     width: 316px;
-    padding-bottom: 30px;
     align-items: center;
     margin: auto;
   }
@@ -225,6 +223,12 @@ button, label {
     width: 300px;
   }
 }
+.drawing-container {
+  margin-top: 16px;
+  overflow-y: hidden;
+  width: 100%;
+}
+
 .canvas-container {
   display: flex;
   flex-direction: column;
@@ -232,6 +236,7 @@ button, label {
   width: 500px;
   min-height: 500px;
   max-height: 500px;
+  margin: auto;
 }
 
 .drawing-canvas {
@@ -240,7 +245,6 @@ button, label {
   background-color: rgba(255, 255, 255, 0.9);
   border: 4px solid #6f36da;
   border-radius: 4px;
-  margin-top: 30px;
   touch-action: none;
 }
 
@@ -258,7 +262,7 @@ button {
 
 .drawing-tools {
   flex-direction: column;
-  width: 100%;
+  width: fit-content;
 }
 
 .pen-color {
@@ -281,14 +285,14 @@ button {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-@media (max-width: 768px), (max-height: 768px) {
+@media (max-width: 720px), (max-height: 720px) {
   .canvas-container {
     width: 400px;
     min-height: 400px;
     max-height: 400px;
   }
 }
-@media (max-width: 576px), (max-height: 576px) {
+@media (max-width: 600px), (max-height: 600px) {
   .canvas-container {
     width: 300px;
     min-height: 300px;
@@ -422,10 +426,6 @@ sass --watch src/Styling/SASS:src/Styling/CSS
   color: #9E9E9E;
 }
 
-html {
-  height: 100%;
-}
-
 body {
   width: 100%;
 }
@@ -511,7 +511,7 @@ h1 {
 .page {
   display: flex;
   justify-content: center;
-  margin-top: 56px;
+  padding-top: 56px;
   height: 100%;
   min-height: 100vh;
 }
@@ -526,9 +526,6 @@ h1 {
   input {
     width: auto;
     height: 1rem;
-  }
-  button {
-    padding: 4px;
   }
 }
 

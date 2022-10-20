@@ -6,6 +6,7 @@ import { auth, database } from '../firebase-config'
 import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
+import { getUserData } from '../Functions/API'
 
 export default function Post(props) {
 
@@ -18,6 +19,7 @@ export default function Post(props) {
     }
     const nav = useNavigate();
     const [userStarred, setUserStarred] = useState(false);
+    const [authorData, setAuthorData] = useState();
 
     const getStars = async() => {
         const postData = await getDoc(postRef);
@@ -77,12 +79,23 @@ export default function Post(props) {
         // eslint-disable-next-line
     }, [stars])
 
+    useEffect(() => {
+       const getAuthorInfo = async() => {
+        await getUserData(props.uid)
+        .then(user => {
+            setAuthorData(user)
+        })
+       }
+
+       getAuthorInfo();
+    }, []);
+
   return (
-    <motion.div className='post' variants={props.variants}>
+    <motion.div className='post' variants={props.variants} onClick={handleProfileClick}>
         <div className='post-info' >
             <div className='author-info'>
-                <RoundButton img={props.user_photo} onClick={handleProfileClick} />
-                <h3>{props.author}</h3>
+                <RoundButton img={authorData?.photoURL} onClick={handleProfileClick} />
+                <h3>{authorData?.displayName}</h3>
             </div>
             <button
             className='stars'

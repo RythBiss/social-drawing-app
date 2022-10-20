@@ -20,10 +20,6 @@ sass --watch src/Styling/SASS:src/Styling/CSS
     color: GlobalVariables.$text-color;
 }
 
-html{
-    height: 100%;
-}
-
 body{
     width: 100%;
 }
@@ -137,7 +133,7 @@ h1{
 .page{
     display: flex;
     justify-content: center;
-    margin-top: GlobalVariables.$header-height;
+    padding-top: GlobalVariables.$header-height;
 
     height: 100%;
     min-height: 100vh;
@@ -156,8 +152,5 @@ h1{
     input{
         width: auto;
         height: 1rem;
-    }
-    button {
-        padding: 4px;
     }
 }
