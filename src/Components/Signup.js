@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
@@ -10,6 +10,9 @@ export default function Signup() {
     const [userValue, setUserValue] = useState('');
     const [passValue, setPassValue] =useState('');
     const [confirmValue, setConfirmValue] = useState('');
+    const [emailExists, setEmailExists] = useState(false);
+    const [emailInvalid, setEmailinvalid] = useState(false);
+    const [nameValid, setNameValid] = useState(true);
 
     const nav = useNavigate();
 
@@ -24,29 +27,60 @@ export default function Signup() {
 
     const submitCredentials = async(event) => {
         event.preventDefault();
+        setEmailExists(false);
+        setEmailinvalid(false);
+
         try{
-            if(passValue === confirmValue) {
+            if((passValue === confirmValue) && (isNameValid())) {
                 await createUserWithEmailAndPassword(auth, userValue, passValue)
                 .then(() => {
                     handleUpdateProfile(nameValue, null);
                     createUserDocs(auth.currentUser.uid, nameValue);
                     toHome();
                 })
-            }else{
-                console.log('Password does not match Confirm Password.');
+            }else{              
+                if(confirmValue !== passValue){
+                    console.log('passwords =/=')
+                }
+                if(isNameValid){
+                    console.log('name invalid')
+                }
             }
         }catch(e){
-            console.log(e.message);
+            console.log(e.code)
+            if(e.code === 'auth/email-already-in-use'){
+                setEmailExists(true);
+            }
+            
+            if(e.code === 'auth/invalid-email'){
+                setEmailinvalid(true);
+            }
         }
-        
-        setNameValue('');
-        setUserValue('');
-        setPassValue('');
-        setConfirmValue('');
     }
+
+    const isNameValid = () => {
+        return (5 <= nameValue.length && nameValue.length <= 15);
+    }
+
+    useEffect(() => {
+        setNameValid(isNameValid());
+        console.log(nameValid)
+    }, [nameValue]);
 
     return (
         <div className='auth-component'>
+            {((passValue !== confirmValue) && (confirmValue !== '')) &&
+                <p>Passwords do not match, please try again.</p>
+            }
+            {emailExists === true &&
+                <p>An account with that email already exists, please try again.</p>
+            }  
+            {emailInvalid === true &&
+                <p>Email is invalid, please try again.</p>
+            }  
+            {nameValid === false &&
+                <p>Username must be between 5-15 characters.</p>
+            }          
             <h1>Sign Up</h1>
             <form onSubmit={submitCredentials} >
                 <input type='text' name='displayname' placeholder='Username' value={nameValue} onChange={event => setNameValue(event.target.value)} /><br/>

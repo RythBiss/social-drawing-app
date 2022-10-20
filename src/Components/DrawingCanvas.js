@@ -4,7 +4,8 @@ import Undo from '../Images/Drawing Buttons/Undo.svg';
 import Redo from '../Images/Drawing Buttons/Redo.svg';
 import Brush from '../Images/Drawing Buttons/Brush.svg';
 import Pallet from '../Images/Drawing Buttons/Pallet.svg';
-import Erase from '../Images/Drawing Buttons/Erase.svg';
+import Erase from '../Images/Drawing Buttons/EraserOff.svg';
+import EraseOn from '../Images/Drawing Buttons/EraserOn.svg';
 import PenSettings from './PenSettings';
 import { postDrawing } from '../Functions/API';
 
@@ -24,13 +25,15 @@ export default function DrawingCanvas(props) {
 
     //event functions
     //-------------------------------------------------------
-    //Touch screen does not work, add events for touch screen
 
     const scaleToFrame = (_x, _y) => {
        return { x: (_x / (frameSize / 500)), y: (_y / (frameSize / 500)) }
     }
 
     const startDrawing = ({ nativeEvent }) => {
+
+        setMenuOpen(false);
+        setMenuType('');
 
         const target = nativeEvent.target.getBoundingClientRect();
         const coords = {
@@ -237,7 +240,7 @@ export default function DrawingCanvas(props) {
                 <RoundButton img={Undo} onClick={undo} />
                 <RoundButton img={Brush} onClick={pickWidth} />
                 <RoundButton img={Pallet} onClick={pickColor} />
-                <RoundButton img={Erase} onClick={erase} />
+                {eraserOn ? <RoundButton toggled={true} img={EraseOn} onClick={erase} /> : <RoundButton toggled={false} img={Erase} onClick={erase} />}
                 <RoundButton img={Redo} onClick={redo} />
             </div>
             <button onClick={submit}>Submit</button>

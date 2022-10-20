@@ -7,6 +7,7 @@ export default function Signin() {
 
     const [userValue, setUserValue] = useState('');
     const [passValue, setPassValue] =useState('');
+    const [error, setError] = useState(false);
 
     const nav = useNavigate();
 
@@ -23,12 +24,15 @@ export default function Signin() {
             await signInWithEmailAndPassword(auth, userValue, passValue);
             toHome();
         }catch(e){
-            console.log(e.message)
+            setError(true);
         }
     }
 
     return (
         <div className='auth-component'>
+            {error === true &&
+                <p>Incorrect email or password, please try again.</p>
+            }
             <h1>Sign In</h1>
             <form onSubmit={submitCredentials} >
                 <input type='text' name='username' placeholder='Username' value={userValue} onChange={event => setUserValue(event.target.value)} /><br/>

@@ -15,14 +15,14 @@ export default function ColorPallet(props) {
 
   return (
     <>
-        {Object.keys(colors).map(swatch => {  
+        {Object.keys(colors).map((swatch, i) => {  
 
             const svg =
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" >
                 <circle cx="25" cy="25" r="25" fill={`${colors[swatch]}`}/>
             </svg>
 
-            return <RoundButton key={swatch.id} svg={svg} onClick={() => changeColor(colors[swatch])} />
+            return <RoundButton key={i} svg={svg} onClick={() => changeColor(colors[swatch])} />
         })}
     </>
   )
