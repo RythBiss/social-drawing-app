@@ -1,6 +1,6 @@
 import './Styling/CSS/MainStyles.css';
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signin from './Components/Signin';
 import Signup from './Components/Signup';
 import Header from './Components/Header';

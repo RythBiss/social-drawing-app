@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import RoundButton from './RoundButton';
 import MenuIcon from '../Images/Common/MenuIcon.svg';
 import { signOut } from 'firebase/auth';

@@ -33,6 +33,7 @@ Bugs:
 19 - Clicking anywhere on a post should take you to the profile it is from.
 20 - [FIXED] Add place holder images for accounts with no profile pic.
 21 - Header needs to have text centered better.
+22 - Following and Draw have some style issues on portrait mode.
 
 Carrie's Bugs:
 [FIXED] it doesn't show me what the colors are, just purple circles and i have to guess

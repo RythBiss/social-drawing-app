@@ -38,7 +38,7 @@ export default function History(props) {
     setUser(searchParams.get('user'));
     setURL(searchParams.get('photo'));
     setUID(searchParams.get('uid'))
-  }, [props.init]);
+  }, [props.init, searchParams]);
 
   const postsContainer = {
     hidden: { opacity: 0 },
