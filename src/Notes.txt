@@ -7,12 +7,12 @@ Big Tasks:
 5 - [DONE] Security rules.
 6 - [DONE] Make sure all documents are generated when a new account is created.
 7 - Add animations, pop up alerts, loading screens, etc. to polish.
-8 - Infinite scrolling.
+8 - [DONE] Infinite scrolling.
 9 - [ALMOST, cleanup the old create post method] Make posts only save the UID, date, and drawing and pull the rest from user data.
 
 Bugs:
 1 - [FIXED] Menu causes whole page to get a scroll bar, it should not.
-2 - Undo sometimes causes stroke to appear different. Hard to replicate.
+2 - [???] () Undo sometimes causes stroke to appear different. Hard to replicate.
 3 - [FIXED] Can't see stars on smaller resolutions.
 3a -[FIXED] Text is cut off. Consider adding display names instead of using emails.
 4 - [FIXED] Posts are loaded oldest to newest, should be reverse.
@@ -33,8 +33,8 @@ Bugs:
 19 - [FIXED] Clicking anywhere on a post should take you to the profile it is from.
 20 - [FIXED] Add place holder images for accounts with no profile pic.
 21 - [FIXED] Header needs to have text centered better.
-22 - Following and Draw have some style issues on portrait mode.
-23 - Clicking on profile needs the page to jump to the top.
+22 - [FIXED] Following and Draw have some style issues on portrait mode.
+23 - [FIXED] Clicking on profile needs the page to jump to the top.
 
 Carrie's Bugs:
 [FIXED] it doesn't show me what the colors are, just purple circles and i have to guess

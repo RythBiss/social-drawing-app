@@ -8,6 +8,7 @@ import Erase from '../Images/Drawing Buttons/EraserOff.svg';
 import EraseOn from '../Images/Drawing Buttons/EraserOn.svg';
 import PenSettings from './PenSettings';
 import { postDrawing } from '../Functions/API';
+import { motion } from "framer-motion"
 
 export default function DrawingCanvas(props) {
     const canvasRef = useRef(null);
@@ -118,7 +119,10 @@ export default function DrawingCanvas(props) {
     }
 
     const pickWidth = (width) => {
-        setPenWidth(width);
+        if(typeof width === 'number') {
+            setPenWidth(width);
+            setEraserOn(false)
+        }
         
         if(menuOpen && menuType === 'Pen'){
             setMenuOpen(false);
@@ -131,9 +135,10 @@ export default function DrawingCanvas(props) {
 
     const pickColor = (color) => {
         //turns off eraser if a color is selected.
-        if(color) { setEraserOn(false); }
-
-        setHex(color);
+        if(typeof color === 'string') {
+            setHex(color);
+            setEraserOn(false);
+        }
 
         if(menuOpen && menuType === 'Color'){
             setMenuOpen(false);
@@ -210,7 +215,6 @@ export default function DrawingCanvas(props) {
         eraserOn ? contextRef.current.globalCompositeOperation = 'destination-out' : contextRef.current.globalCompositeOperation = 'source-over';
     }, [eraserOn]);
 
-
     useLayoutEffect(() => {
         const resizeListener = () => { if(canvasRef.current.offsetWidth !== frameSize) setFrameSize(canvasRef.current.offsetWidth) }
 
@@ -221,9 +225,43 @@ export default function DrawingCanvas(props) {
 
     //-------------------------------------------------------
 
+    const canvasAnim = {
+        hidden: { opacity: 0, y: '50%' },
+        show: { opacity: 1, y: '0%',
+        transition: { duration: 0.25, type: "tween", delay: 0.05 }
+    }
+      };
+
+    const submitButton = {
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            delay: 0.5
+          }
+        }
+      };
+
+    const buttonsContainer = {
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.05,
+            delayChildren: 0.25
+          }
+        }
+      };
+
+      const buttonAnim = {
+        hidden: { opacity: 0 },
+        show: { opacity: 1 }
+      };
+
   return (
     <>
-        <canvas
+        <motion.canvas
+            variants={canvasAnim} initial="hidden" animate="show"
             className='drawing-canvas'
             onMouseDown={startDrawing}
             onTouchStart={startDrawing}
@@ -235,15 +273,15 @@ export default function DrawingCanvas(props) {
             ref={canvasRef}
         />
         <div className='drawing-tools'>
-            <div className='button-row'>
+            <motion.div className='button-row' variants={buttonsContainer} initial="hidden" animate="show">
                 <PenSettings open={menuOpen} type={menuType} colorResultFunc={pickColor} penWidthFunc={pickWidth} />
-                <RoundButton img={Undo} onClick={undo} />
-                <RoundButton img={Brush} onClick={pickWidth} />
-                <RoundButton img={Pallet} onClick={pickColor} />
-                {eraserOn ? <RoundButton toggled={true} img={EraseOn} onClick={erase} /> : <RoundButton toggled={false} img={Erase} onClick={erase} />}
-                <RoundButton img={Redo} onClick={redo} />
-            </div>
-            <button onClick={submit}>Submit</button>
+                <RoundButton img={Undo} onClick={undo} variants={buttonAnim} />
+                <RoundButton img={Brush} onClick={pickWidth} variants={buttonAnim} />
+                <RoundButton img={Pallet} onClick={pickColor} variants={buttonAnim} />
+                {eraserOn ? <RoundButton toggled={true} img={EraseOn} onClick={erase} variants={buttonAnim} /> : <RoundButton toggled={false} img={Erase} onClick={erase} variants={buttonAnim} />}
+                <RoundButton img={Redo} onClick={redo} variants={buttonAnim} />
+            </motion.div>
+            <motion.button onClick={submit} variants={submitButton} initial="hidden" animate="show">Submit</motion.button>
         </div>
     </>
   )

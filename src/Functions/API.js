@@ -1,6 +1,6 @@
 import { auth, storage, database } from '../firebase-config'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, updateDoc, arrayUnion, arrayRemove, setDoc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, where, doc, updateDoc, arrayUnion, arrayRemove, setDoc, getDoc, limit, startAfter } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 
 const postsTableRef = collection(database, 'posts');
@@ -23,9 +23,12 @@ export const getFollowed = async() => {
     return followList;
 }
 
-export const getPosts = async(setPosts) => {
-    const postQuery = query(postsTableRef, orderBy('date_time', 'desc'));
+export const getPosts = async(setPosts, after) => {
+    console.log('getPosts called')
+    
+    const postQuery = after ? query(postsTableRef, orderBy('date_time', 'desc'), limit(5), startAfter(after)) : query(postsTableRef, orderBy('date_time', 'desc'), limit(5));
     const response = await getDocs(postQuery);
+    console.log(response)
 
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
 }

@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 import DefaultProfile from '../Images/Common/DefaultProfile.png'
 import { motion } from "framer-motion"
 
-
 export default function History(props) {
 
   const [posts, setPosts] = useState([]);
@@ -16,13 +15,17 @@ export default function History(props) {
   const [UID, setUID] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
-
   const clickFollow = () =>{
     handleFollow(UID)
     .then(res => setIsFollowing(res));
   }
 
   useEffect(() => {
+    getHistory(setPosts, searchParams.get('user'));
+    setUser(searchParams.get('user'));
+    setURL(searchParams.get('photo'));
+    setUID(searchParams.get('uid'));
+
     if(UID) {
       const getIsFollowing = async() => {
         await isFollowingUser(UID)
@@ -31,13 +34,6 @@ export default function History(props) {
 
       getIsFollowing();
     }
-  }, [UID]);
-
-  useEffect(() => {
-    getHistory(setPosts, searchParams.get('user'));
-    setUser(searchParams.get('user'));
-    setURL(searchParams.get('photo'));
-    setUID(searchParams.get('uid'))
   }, [props.init, searchParams]);
 
   const postsContainer = {

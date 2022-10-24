@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RoundButton from './RoundButton';
 import MenuIcon from '../Images/Common/MenuIcon.svg';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
-import { createSearchParams, useNavigate } from 'react-router-dom';
+import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion"
 
 export default function Header(props) {
@@ -15,6 +15,8 @@ export default function Header(props) {
     uid: auth?.currentUser?.uid,
     photo: auth?.currentUser?.photoURL
   }
+  const location = useLocation();
+
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   }
@@ -51,6 +53,12 @@ export default function Header(props) {
     });
   }
 
+  useEffect(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }, [location]);
+  
+
   return (
     <>
       {props.init &&
@@ -68,7 +76,7 @@ export default function Header(props) {
               initial={{x: '100%'}}
               animate={{x: '-0%'}}
               exit={{x: '100%'}}
-              transition={{ duration: 0.25, type: "tween", delay: 0.2 }}
+              transition={{ duration: 0.15, type: "tween" }}
               className='main-menu'>
                 <li onClick={toHome}>Home</li>
                 <li onClick={toDraw}>Draw</li>

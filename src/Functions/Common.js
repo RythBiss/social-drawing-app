@@ -21,12 +21,17 @@ export const mapPosts = (posts) => {
 }
 
 export const mapUsers = (users) => {
+  console.log(users)
+  try{
     return users.length === 0 ? (<h3>Loading...</h3>) : (Object.keys(users).map(current => 
-        <FollowingCard
-            key={current}
-            uid={users[current].userID}
-            user={users[current].displayName}
-            user_photo={users[current].photoURL}
-        />
-    ))
+      <FollowingCard
+          key={current}
+          uid={users[current].userID}
+          user={users[current].displayName}
+          user_photo={users[current].photoURL}
+      />
+  ))
+  }catch(e){
+    console.log(`error ${e}`)
+  }
 }

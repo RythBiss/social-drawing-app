@@ -12,11 +12,7 @@ export default function Post(props) {
 
     const [stars, setStars] = useState(props.stars);
     const postRef = doc(database, 'posts', props.postId);
-    const params = {
-        user: props.author,
-        uid: props.uid,
-        photo: props.user_photo
-    }
+    const params = { user: props.author, uid: props.uid, photo: props.user_photo }
     const nav = useNavigate();
     const [userStarred, setUserStarred] = useState(false);
     const [authorData, setAuthorData] = useState();
@@ -70,7 +66,7 @@ export default function Post(props) {
     useEffect(() => {
         const checkStarStatus = async() =>{
             const postData = await getDoc(postRef);
-            const searchUid = postData.data().star_users.find(element => element === auth.currentUser.uid);
+            const searchUid = postData.data().star_users && postData.data().star_users.find(element => element === auth.currentUser.uid);
 
             setUserStarred(searchUid === undefined ? false : true);
         };
@@ -91,7 +87,7 @@ export default function Post(props) {
     }, []);
 
   return (
-    <motion.div className='post' variants={props.variants} onClick={handleProfileClick}>
+    <motion.div className='post' variants={props.variants}>
         <div className='post-info' >
             <div className='author-info'>
                 <RoundButton img={authorData?.photoURL} onClick={handleProfileClick} />
@@ -114,7 +110,7 @@ export default function Post(props) {
                 </div>
             </button>
         </div>
-        <img className='post-content' src={props.content} alt='post' />
+        <img className='post-content' src={props.content} alt='post'  onClick={handleProfileClick} />
     </motion.div>
   )
 }

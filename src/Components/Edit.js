@@ -1,14 +1,32 @@
 import React, { useState } from 'react'
 import { handleUpdateProfile } from '../Functions/API'
+import { motion } from "framer-motion"
+
 
 export default function Edit() {
 
     const [name, setName] = useState('');
     const [URL, setURL] = useState(null);
 
+    const fieldsContainer = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.1
+            }
+        }
+    }    
+
+    const fieldsAnim = {
+        hidden: { opacity: 0 },
+        show: { opacity: 1 }
+      };
+
   return (
-    <div className='edit-container'>
-        <div className='edit-name'>
+    <motion.div className='edit-container' variants={fieldsContainer} initial="hidden" animate="show">
+        <motion.div className='edit-name' variants={fieldsAnim}>
             <h1>Change Display Name</h1>
             <div>
                 <input type='text' placeholder='Display Name' value={name} onChange={e => setName(e.target.value)} />
@@ -18,8 +36,8 @@ export default function Edit() {
                     }
                 }} >Save Changes</button>
             </div>
-        </div>
-        <div className='edit-pic'>
+        </motion.div>
+        <motion.div className='edit-pic' variants={fieldsAnim} >
             <h1>Change Profile Picture</h1>
             <div>
                 <label htmlFor='upload'>Upload Image</label>
@@ -35,7 +53,7 @@ export default function Edit() {
                     URL ? URL.name : ''
                 }
             </p>
-        </div>
-    </div>
+        </motion.div>
+    </motion.div>
   )
 }
