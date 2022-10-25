@@ -154,8 +154,9 @@ export default function DrawingCanvas(props) {
     }
 
     const submit = async() => {
-        await postDrawing(canvasRef.current)
-        .then(props.onCompletion());
+        if(history.length !== 0){
+            const test = await postDrawing(canvasRef.current, props.onCompletion);
+        }
     }
 
     //update effects

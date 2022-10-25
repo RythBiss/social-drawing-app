@@ -44,6 +44,11 @@ export default function Header(props) {
     toggleMenu();
   }
 
+  const toEdit = () => {
+    nav('/Edit');
+    toggleMenu();
+  }
+
   const logOut = async() => {
     signOut(auth).then(() => {
       nav('/');
@@ -68,7 +73,7 @@ export default function Header(props) {
           animate={{y: '0%'}}
           transition={{ duration: 0.5, type: "tween" }}
         >
-          <RoundButton img={props.profilePic} onClick={() => {nav('/Edit')}} />
+          <RoundButton img={props.profilePic} />
           <h1>Pen Pals</h1>
           <AnimatePresence>
           {openMenu &&
@@ -82,6 +87,7 @@ export default function Header(props) {
                 <li onClick={toDraw}>Draw</li>
                 <li onClick={toProfile}>Profile</li>
                 <li onClick={toFollowing}>Following</li>
+                <li onClick={toEdit}>Edit Profile</li>
                 <li className='li-last' onClick={logOut}>Sign Out</li>
             </motion.ul>
           }

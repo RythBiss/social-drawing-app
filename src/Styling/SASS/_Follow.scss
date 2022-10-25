@@ -3,7 +3,8 @@
 .following{
     width: 100%;
     overflow-y: hidden;
-    margin: 8px
+    margin: 8px;
+    padding-top: GlobalVariables.$header-height;
 }
 
 .follow-card{

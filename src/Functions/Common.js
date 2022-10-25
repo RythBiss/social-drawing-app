@@ -21,7 +21,6 @@ export const mapPosts = (posts) => {
 }
 
 export const mapUsers = (users) => {
-  console.log(users)
   try{
     return users.length === 0 ? (<h3>Loading...</h3>) : (Object.keys(users).map(current => 
       <FollowingCard

@@ -7,7 +7,7 @@
 
 .edit-container{
     width: 75%;
-
+    padding-top: GlobalVariables.$header-height;
     flex-direction: column;
     @extend %flex-center;
     justify-content: flex-start;

@@ -88,6 +88,7 @@ export default function Post(props) {
 
   return (
     <motion.div className='post' variants={props.variants}>
+        <img className='post-content' src={props.content} alt='post'  onClick={handleProfileClick} />
         <div className='post-info' >
             <div className='author-info'>
                 <RoundButton img={authorData?.photoURL} onClick={handleProfileClick} />
@@ -110,7 +111,6 @@ export default function Post(props) {
                 </div>
             </button>
         </div>
-        <img className='post-content' src={props.content} alt='post'  onClick={handleProfileClick} />
     </motion.div>
   )
 }

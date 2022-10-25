@@ -18,17 +18,18 @@ const createPost = async(author, url) => {
 }
 
 export const getFollowed = async() => {
+try{
     const followList = await getDocs(query(followTableRef, where('owner', '==', auth.currentUser.uid)));
 
     return followList;
+}catch(e){
+    console.log(e)
+}
 }
 
-export const getPosts = async(setPosts, after) => {
-    console.log('getPosts called')
-    
+export const getPosts = async(setPosts, after) => { 
     const postQuery = after ? query(postsTableRef, orderBy('date_time', 'desc'), limit(5), startAfter(after)) : query(postsTableRef, orderBy('date_time', 'desc'), limit(5));
     const response = await getDocs(postQuery);
-    console.log(response)
 
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
 }
@@ -40,7 +41,7 @@ export const getHistory = async(setPosts, user) => {
     setPosts(response.docs.map((entry) => ({...entry.data(), id: entry.id})));
 }
 
-export const postDrawing = async(canvas) => {
+export const postDrawing = async(canvas, callback) => {
     const drawingRefFB = ref(
         storage,
         `drawings/${auth.currentUser.uid}/canvas-${Math.floor(Math.random() * (99999 - 10000) + 10000)}`
@@ -53,12 +54,13 @@ export const postDrawing = async(canvas) => {
             getDownloadURL(ref(storage, drawingRefFB._location.path_))
             .then((response) => {
                 createPost(author, response);
+                callback();
             });
         });
     });
 }
 
-export const handleUpdateProfile = async(name, img) => {
+export const handleUpdateProfile = async(name, img, callback) => {
     const update = async () => {
         if(img){
             const uploadRefFB = ref(
@@ -73,6 +75,8 @@ export const handleUpdateProfile = async(name, img) => {
                         photoURL: url
                     })
                     .then(async() => await setUserDoc())
+
+                    callback(url);
                 });
             });
         }

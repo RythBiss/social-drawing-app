@@ -3,7 +3,7 @@ import { handleUpdateProfile } from '../Functions/API'
 import { motion } from "framer-motion"
 
 
-export default function Edit() {
+export default function Edit(props) {
 
     const [name, setName] = useState('');
     const [URL, setURL] = useState(null);
@@ -44,7 +44,7 @@ export default function Edit() {
                 <input id='upload' type='file' onChange={(e) => {setURL(e.target.files[0])}} />
                 <button onClick={() => {
                     if(URL !== null){
-                        handleUpdateProfile(null, URL);
+                        handleUpdateProfile(null, URL, props.onImageUpdate);
                     }
                 }} >Save Changes</button>
             </div>

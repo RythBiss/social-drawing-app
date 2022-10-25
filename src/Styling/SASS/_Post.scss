@@ -11,8 +11,6 @@
 
     margin: 8px;
     width: fit-content;
-
-    border-bottom: 8px solid GlobalVariables.$primary-color;
 }
 
 .post-content{
@@ -67,7 +65,7 @@
         @extend %flex-center;
         height: 100%;
         > h3{
-            margin-top: 5px;
+            margin-top: 8px;
             font-size: 1.4rem;
             
             text-align: center;

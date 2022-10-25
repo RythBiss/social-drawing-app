@@ -54,7 +54,7 @@ function App() {
             <Route path='/Draw' element={<Drawing />} />
             <Route path='/Following' element={<Following />} />
             <Route path='/Profile' element={<Profile init={isInit} image={profilePic} />} />
-            <Route path='/Edit' element={<Edit />} />
+            <Route path='/Edit' element={<Edit onImageUpdate={setProfilePic} />} />
           </Routes>
         </div>
       </div>

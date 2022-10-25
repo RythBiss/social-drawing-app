@@ -55,7 +55,7 @@ export default function History(props) {
               initial={{scale: 0}}
               animate={{scale: imgLoaded ? 1 : 0}}
             >
-              <img onLoad={() => setImgLoaded(true)} className='profile-image' src={URL !== 'null' ? URL : DefaultProfile /*searchParams returns 'null' instead of a null value for some reason*/} alt='profile' />
+              <img onLoad={() => setImgLoaded(true)} className='profile-image' src={URL !== 'null' ? URL : DefaultProfile /*searchParams returns 'null' (string) instead of a null value for some reason*/} alt='profile' />
             </motion.div>
             <h4>
               {user ? `${user}` : '-'}
