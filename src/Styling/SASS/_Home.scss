@@ -30,22 +30,14 @@
     margin: auto;
 }
 
-.home-nav{
-    @extend %purple-content;
-    margin: 0 8px;
-    font-size: 1rem;
-    max-width: none;
-}
-
-.home-nav:hover{
-    background-color: GlobalVariables.$hover-color;
-}
-
 .home-buttons{
     width: 100%;
     margin-top: 16px;
     display: flex;
     justify-content: space-between;
+    > button{
+        margin: 8px;
+    }
 }
 
 @media (max-width: 576px), (max-height: 576px) {

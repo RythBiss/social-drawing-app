@@ -155,12 +155,17 @@ export default function DrawingCanvas(props) {
 
     const submit = async() => {
         if(history.length !== 0){
-            const test = await postDrawing(canvasRef.current, props.onCompletion);
+            props.setLoading(true)
+            await postDrawing(canvasRef.current, props.onCompletion);
         }
     }
 
     //update effects
     //-------------------------------------------------------
+
+    useEffect(() => {
+        props.setLoading(false)
+    }, []);
 
     //initialize
     useEffect(() => {

@@ -3,7 +3,7 @@ import { auth } from '../firebase-config';
 import { getFollowed, getUserData } from '../Functions/API'
 import { mapUsers } from '../Functions/Common';
 
-export default function Following() {
+export default function Following(props) {
 
   const [followList, setFollowList] = useState([]);
   const [userDataList, setUserDataList] = useState([]);
@@ -20,12 +20,15 @@ export default function Following() {
   }, [followList])
 
   useEffect(() => {
-    //setUserDataList([])
+    setUserDataList([]);
+
+    props.setLoading(true);
 
     const removeAuthListener = auth.onAuthStateChanged(() => {
       if(followList.length === 0) {
         getFollowed()
         .then(res => {
+          props.setLoading(false);
           setFollowList(res.docs[0].data().followed)
         });
       }

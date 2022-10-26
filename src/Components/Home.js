@@ -100,9 +100,9 @@ export default function Home(props) {
       {(props.init && posts) &&
         <div className='posts-container'>
           <motion.div className='home-buttons' variants={buttonsContainer} initial="hidden" animate="show">
-            <motion.button className='home-nav' onClick={toDraw} variants={buttonAnim}>Create Drawing</motion.button>
-            <motion.button className='home-nav' onClick={toProfile} variants={buttonAnim}>Profile</motion.button>
-            <motion.button className='home-nav' onClick={toFollowing} variants={buttonAnim}>Following</motion.button>
+            <motion.button onClick={toDraw} variants={buttonAnim}>Create Drawing</motion.button>
+            <motion.button onClick={toProfile} variants={buttonAnim}>Profile</motion.button>
+            <motion.button onClick={toFollowing} variants={buttonAnim}>Following</motion.button>
           </motion.div>
           <motion.div variants={postsContainer} initial="hidden" animate="show">
             {mapPosts(posts)}

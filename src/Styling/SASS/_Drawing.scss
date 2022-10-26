@@ -4,18 +4,18 @@
     margin-top: 16px;
     overflow-y: hidden;
     width: 100%;
-    padding-top: GlobalVariables.$header-height;
+    margin-top: 56px;
 }
 
 .canvas-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    @extend %even-shadow;
+    
     width: 500px;
     min-height: 500px;
     max-height: 500px;
-    margin: auto;
+    margin: 8px auto;
 }
 
 .drawing-canvas{

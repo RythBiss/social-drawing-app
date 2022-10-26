@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { createUserDocs, handleUpdateProfile } from '../Functions/API';
 
-export default function Signup() {
+export default function Signup(props) {
 
     const [nameValue, setNameValue] = useState('');
     const [userValue, setUserValue] = useState('');
@@ -32,8 +32,10 @@ export default function Signup() {
 
         try{
             if((passValue === confirmValue) && (isNameValid())) {
+                props.setLoading(true);
                 await createUserWithEmailAndPassword(auth, userValue, passValue)
                 .then(() => {
+                    props.setLoading(false);
                     handleUpdateProfile(nameValue, null);
                     createUserDocs(auth.currentUser.uid, nameValue);
                     toHome();
@@ -47,6 +49,7 @@ export default function Signup() {
                 }
             }
         }catch(e){
+            props.setLoading(false);
             console.log(e.code)
             if(e.code === 'auth/email-already-in-use'){
                 setEmailExists(true);

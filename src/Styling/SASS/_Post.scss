@@ -3,10 +3,7 @@
 .post{
     display: flex;
     flex-direction: column;
-
     border-radius: 4px;
-    @extend %even-shadow;
-
     overflow: hidden;
 
     margin: 8px;

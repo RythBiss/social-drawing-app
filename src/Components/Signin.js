@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase-config';
 
-export default function Signin() {
+export default function Signin(props) {
 
     const [userValue, setUserValue] = useState('');
     const [passValue, setPassValue] =useState('');
@@ -21,9 +21,12 @@ export default function Signin() {
     const submitCredentials = async(event) => {
         event.preventDefault();
         try{
-            await signInWithEmailAndPassword(auth, userValue, passValue);
-            toHome();
+            props.setLoading(true)
+            await signInWithEmailAndPassword(auth, userValue, passValue)
+            .then(() => props.setLoading(false));
+            toHome(2);
         }catch(e){
+            props.setLoading(false)
             setError(true);
         }
     }
