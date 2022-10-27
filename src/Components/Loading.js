@@ -5,7 +5,7 @@ export default function Loading() {
 
   return (
     <motion.div className='loading'
-        animate={{y: -24}}
+        animate={{y: '-2vw'}}
         transition={{
             repeat: Infinity,
             repeatType: "reverse",
@@ -16,7 +16,7 @@ export default function Loading() {
         >
         Loading
         <motion.div
-            animate={{y: -24}}
+            animate={{y: '-2vw'}}
             transition={{
                 repeat: Infinity,
                 repeatType: "reverse",
@@ -27,7 +27,7 @@ export default function Loading() {
         >.</motion.div>
 
         <motion.div
-            animate={{y: -24}}
+            animate={{y: '-2vw'}}
             transition={{
                 repeat: Infinity,
                 repeatType: "reverse",
@@ -39,7 +39,7 @@ export default function Loading() {
         >.</motion.div>
 
         <motion.div
-            animate={{y: -24}}
+            animate={{y: '-2vw'}}
             transition={{
                 repeat: Infinity,
                 repeatType: "reverse",

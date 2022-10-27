@@ -35,8 +35,9 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    //prevents unnecessary calls if user is at the end
-    if(posts && (after !== posts[posts.length - 1].date_time)) {
+    //prevents unnecessary calls
+    console.log(posts)
+    if((posts !== null) && (posts.length !== 0) && (after !== posts[posts.length - 1].date_time)) {
       setAfter(posts[posts.length - 1].date_time);
       setAfterUsed(false);
     }

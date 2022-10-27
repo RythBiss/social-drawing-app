@@ -3,7 +3,7 @@ import GoldStar from '../Images/Common/GoldStar.png'
 import BlankStar from '../Images/Common/StarOutline.png'
 import RoundButton from './RoundButton'
 import { auth, database } from '../firebase-config'
-import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
+import { arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, limit, query, updateDoc, where } from 'firebase/firestore'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
 import { getUserData } from '../Functions/API'
@@ -11,49 +11,43 @@ import { getUserData } from '../Functions/API'
 export default function Post(props) {
 
     const [stars, setStars] = useState(props.stars);
-    const postRef = doc(database, 'posts', props.postId);
+    const [userStars, setUserStars] = useState(null);
     const params = { user: props.author, uid: props.uid, photo: props.user_photo }
     const nav = useNavigate();
     const [userStarred, setUserStarred] = useState(false);
     const [authorData, setAuthorData] = useState();
+    const starList = query(collection(database, 'star_lists'), where('post_id', '==', props.postId), limit(1));
 
     const getStars = async() => {
-        const postData = await getDoc(postRef);
-
-        if(postData.data().star_users){
-            setStars(postData.data().star_users.length);
-        }
+        await getDocs(starList).then(res => setStars(res.docs[0].data().post_stars.length))
     }
 
-    const addStar = async() => {
-        await updateDoc(postRef, {
-            star_users: arrayUnion(auth.currentUser.uid)
+    const addStar = async(starList) => {
+        await updateDoc(starList.ref, {
+            post_stars: arrayUnion(auth.currentUser.uid)
         }).then(() => {
             getStars();
         });
     }
 
-    const revokeStar = async() => {
-        await updateDoc(postRef, {
-            star_users: arrayRemove(auth.currentUser.uid)
+    const revokeStar = async(starList) => {
+        await updateDoc(starList.ref, {
+            post_stars: arrayRemove(auth.currentUser.uid)
         }).then(() => {
             getStars();
         });
     }
 
     const handleStarClick = async() => {
-        const postData = await getDoc(postRef);
-        
-        if(postData.data().star_users){
-            const searchUid = postData.data().star_users.find(element => element === auth.currentUser.uid);
-            if(searchUid === auth.currentUser.uid){
-                revokeStar();
+        await getDoc(userStars)
+        .then(res => {
+            const findUID = res.data().post_stars.find(element => element === auth.currentUser.uid);
+            if(findUID === auth.currentUser.uid){
+                revokeStar(res);
             }else{
-                addStar();
+                addStar(res);
             }
-        }else{
-            addStar();
-        }
+        })       
     }
 
     const handleProfileClick = () => {
@@ -65,25 +59,34 @@ export default function Post(props) {
 
     useEffect(() => {
         const checkStarStatus = async() =>{
-            const postData = await getDoc(postRef);
-            const searchUid = postData.data().star_users && postData.data().star_users.find(element => element === auth.currentUser.uid);
-
-            setUserStarred(searchUid === undefined ? false : true);
+            await getDoc(userStars)
+            .then((res) => {
+                const searchUid = res.data().post_stars.find(element => element === auth.currentUser.uid)
+                setUserStarred(searchUid === undefined ? false : true);
+            });
         };
 
-        checkStarStatus();
+        if(userStars){
+            checkStarStatus();
+            getStars();
+        }
         // eslint-disable-next-line
-    }, [stars])
+    }, [stars, userStars])
 
     useEffect(() => {
        const getAuthorInfo = async() => {
         await getUserData(props.uid)
-        .then(user => {
-            setAuthorData(user)
-        })
+        .then(user => { setAuthorData(user) })
+       }
+
+       const getUserStars = async() => {
+        await getDocs(starList)
+        .then((res) => getDoc(doc(database, 'star_lists', `${res.docs[0].id}`)))
+        .then((res) => setUserStars(doc(database, 'star_lists', res.id)));
        }
 
        getAuthorInfo();
+       getUserStars();
     }, []);
 
   return (

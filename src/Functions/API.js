@@ -6,15 +6,25 @@ import { updateProfile } from 'firebase/auth';
 const postsTableRef = collection(database, 'posts');
 const followTableRef = collection(database, 'follow_lists');
 const userTableRef = collection(database, 'user_data');
+const postStarLists = collection(database, 'star_lists');
 
-const createPost = async(author, url) => {
+const createPost = async(author, url, callback) => {
     await addDoc(postsTableRef,{
         author_id: author,
         author_uid: auth.currentUser.uid,
         profile_img: auth.currentUser.photoURL,
         image_url: url,
         date_time: serverTimestamp()
-    });
+    })
+    .then((res) => createPostStarList(res.id, callback))
+}
+
+const createPostStarList = async(id, callback) => {
+    await addDoc(postStarLists, {
+        post_id: id,
+        post_stars: arrayUnion(auth.currentUser.uid)
+    })
+    .then(() => {callback();})
 }
 
 export const getFollowed = async() => {
@@ -53,8 +63,7 @@ export const postDrawing = async(canvas, callback) => {
         uploadBytes(drawingRefFB, blob).then(() => {
             getDownloadURL(ref(storage, drawingRefFB._location.path_))
             .then((response) => {
-                createPost(author, response);
-                callback();
+                createPost(author, response, callback);
             });
         });
     });
